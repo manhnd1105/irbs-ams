@@ -45,7 +45,7 @@
 | the active record class
 */
 
-$active_group = 'remote';
+$active_group = 'default';
 $active_record = TRUE;
 
 $db['remote']['hostname'] = '123.30.238.216:1105';
