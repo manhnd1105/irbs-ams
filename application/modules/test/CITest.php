@@ -12,7 +12,7 @@
  * 
  * @property-read resource	$db		Reference to database
  */
-abstract class CITestCase extends PHPUnit_Extensions_Database_TestCase
+class CITestCase extends PHPUnit_Extensions_Database_TestCase
 {
 	/**
 	 * Reference to CodeIgniter

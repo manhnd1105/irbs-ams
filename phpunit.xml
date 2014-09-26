@@ -3,7 +3,9 @@
 <phpunit bootstrap="application/modules/test/bootstrap.php">
     <testsuites>
         <testsuite name="TestSuite">
-            <directory>./application/modules/test/controllers</directory>
+            <!--<directory>./application/modules/test/controllers</directory>-->
+            <!--<directory>./application/modules/test/DB</directory>-->
+            <directory>./application/modules/test/models</directory>
         </testsuite>
     </testsuites>
     <php>

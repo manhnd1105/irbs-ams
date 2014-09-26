@@ -8,7 +8,7 @@
 //define('BASEPATH', str_replace("\\", "/", 'system'));
 //require_once __DIR__ . '/../../../../system/core/Model.php';
 //require_once (__DIR__ . '/../../rbac/models/model_rbac_assigning.php');
-//require_once(__DIR__ . '/../CITestCase.php');
+//require_once(__DIR__ . '/../CITest.php');
 
 class ModelRbacAssigningTest extends PHPUnit_Framework_TestCase
 {
