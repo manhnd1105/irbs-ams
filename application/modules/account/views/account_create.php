@@ -7,9 +7,9 @@
  * @var string $role_tree html format of tree of role nodes
  */
 
-echo "<link rel='stylesheet' href='" . base_url() . "dist/themes/default/style.min.css'/>";
-echo "<script src='" . base_url() . "dist/libs/jquery.js'></script>";
-echo "<script src='" . base_url() . "dist/jstree.min.js'></script>";
+echo "<link rel='stylesheet' href='" . base_url() . "assets/third_party/jstree/themes/default/style.min.css'/>";
+echo "<script src='" . base_url() . "assets/js/jquery.js'></script>";
+echo "<script src='" . base_url() . "assets/third_party/jstree/jstree.min.js'></script>";
 echo "<script src='" . base_url() . "application/modules/account/views/js/role_tree.js'></script>";
 
 echo form_open('account/account_controller/create');
