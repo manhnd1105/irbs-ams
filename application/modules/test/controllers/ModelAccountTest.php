@@ -10,17 +10,17 @@ require_once __DIR__ . '/../../account/models/model_account.php';
 /**
  * Class ModelAccountTest
  */
-class ModelAccountTest extends CITestCase
+class ModelAccountTest extends  PHPUnit_Framework_TestCase
 {
     /**
-     * @param array  $where
+     * @param array $where
      * @param string $required_fields
      * @param string $return_type
-     * @param array  $expected
+     * @param array $expected
      * @dataProvider providerRead
      */
     public function testRead($where, $required_fields, $return_type,
-                             $expected)
+                                $expected)
     {
         //Create an instance of model
         $model = new Model_account();
@@ -39,21 +39,21 @@ class ModelAccountTest extends CITestCase
     {
         return array(
             '0' => array(
-                'where'          => NULL,
+                'where' => NULL,
                 'require_fields' => '*',
-                'return_type'    => 'all',
-                'expected'       => array(
-                    '0' => array(
-                        'id'           => "8",
+                'return_type' => 'all',
+                'expected' => array(
+                    '0' => array (
+                        'id' => "8",
                         'account_name' => "manhnd",
-                        'staff_name'   => "Nguyễn Đức Mạnh",
-                        'password'     => "123456"
+                        'staff_name' => "Nguyễn Đức Mạnh",
+                        'password' => "123456"
                     ),
-                    '1' => array(
-                        'id'           => "22",
+                    '1' => array (
+                        'id' => "22",
                         'account_name' => "jhk",
-                        'staff_name'   => "jhk",
-                        'password'     => "jhk"
+                        'staff_name' => "jhk",
+                        'password' => "jhk"
                     ),
                 )
             )

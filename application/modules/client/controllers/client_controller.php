@@ -37,8 +37,8 @@ class Client_controller extends CI_Controller
         $method = 'get';
         $uri = 'check_permission';
         $params = array(
-            'acc_name' => 'manhnd',
-            'password' => '123456'
+            'acc_id' => '8',
+            'perm_path' => '/irbs/account/account_controller/'
         );
         //$method is putted in {} to vary method name instead of calling a fixed name function
         $request = $this->rest->{$method}($uri, $params);

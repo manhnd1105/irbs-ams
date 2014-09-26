@@ -483,7 +483,7 @@ abstract class REST_Controller extends MX_Controller
         set_status_header($http_code);
 
         // If zlib.output_compression is enabled it will compress the output,
-        // but it will not modify the content-length header to compensate for
+        // but it will not update the content-length header to compensate for
         // the reduction, causing the browser to hang waiting for more data.
         // We'll just skip content-length in those cases.
         if (!$this->_zlib_oc && !$CFG->item('compress_output')) {

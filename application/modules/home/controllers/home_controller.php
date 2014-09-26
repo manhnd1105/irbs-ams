@@ -1,5 +1,5 @@
 <?php
-if (! defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Class Home_controller
@@ -25,6 +25,24 @@ class Home_controller extends Backend_Controller
     public function index()
     {
         //Call the layout (as method of template controller) that you want to display
+        //$data['actions'] = $this->init_actions();
         $this->template_controller->demo_template('home', 'index');
     }
+
+    /**
+     * @return array
+     */
+    function init_actions()
+    {
+        $actions = array(
+            anchor('account/account_controller', 'Manage Inkiu accounts'),
+            anchor('account/account_controller/view_create', 'Create Inkiu account'),
+            anchor('authentication/authentication_controller/', 'Authentication'),
+            anchor('rbac/perm_controller/', 'Manage permissions'),
+            anchor('rbac/role_controller/', 'Manage roles'),
+            anchor('http://inkiu.vn/irbs-dms/index.php/api/api_controller/order', 'Access to external system: get list orders')
+        );
+        return $actions;
+    }
+
 }

@@ -1,11 +1,11 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: dell
  * Date: 9/11/14
  * Time: 2:49 PM
  */
+
 class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
 {
 
@@ -54,24 +54,24 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
     {
         return array(
             '0' => array(
-                'input'    => array(
-                    'id'           => '8',
+                'input' => array(
+                    'id' => '8',
                     'account_name' => 'manhnd',
-                    'staff_name'   => 'aaa',
-                    'password'     => '123456',
-                    'address'      => 'asw huy6',
-                    'roles'        => array()
+                    'staff_name' => 'aaa',
+                    'password' => '123456',
+                    'address' => 'asw huy6',
+                    'roles' => array()
                 ),
                 'expected' => '\super_classes\InkiuAccount'
             ),
             '1' => array(
-                'input'    => array(
-                    'id'           => '2',
+                'input' => array(
+                    'id' => '2',
                     'account_name' => 'fsdfg',
-                    'staff_name'   => 'aa33a',
-                    'password'     => '123456',
-                    'address'      => 'asw huy6',
-                    'roles'        => array()
+                    'staff_name' => 'aa33a',
+                    'password' => '123456',
+                    'address' => 'asw huy6',
+                    'roles' => array()
                 ),
                 'expected' => '\super_classes\InkiuAccount'
             )
@@ -127,30 +127,30 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
         $role_obj->set_parent_id(null);
         return array(
             '0' => array(
-                'input'                  => array(
-                    'id'           => '8',
+                'input' => array(
+                    'id' => '8',
                     'account_name' => 'manhnd',
-                    'staff_name'   => 'aaa',
-                    'password'     => '123456',
-                    'address'      => 'asw huy6',
-                    'roles'        => array()
+                    'staff_name' => 'aaa',
+                    'password' => '123456',
+                    'address' => 'asw huy6',
+                    'roles' => array()
                 ),
                 'expected_read_role_obj' => $role_obj,
-                'expected_map_db'        => true,
-                'expected'               => false
+                'expected_map_db' => true,
+                'expected' => false
             ),
             '1' => array(
-                'input'                  => array(
-                    'id'           => '2',
+                'input' => array(
+                    'id' => '2',
                     'account_name' => 'fsdfg',
-                    'staff_name'   => 'aa33a',
-                    'password'     => '123456',
-                    'address'      => 'asw huy6',
-                    'roles'        => array()
+                    'staff_name' => 'aa33a',
+                    'password' => '123456',
+                    'address' => 'asw huy6',
+                    'roles' => array()
                 ),
                 'expected_read_role_obj' => $role_obj,
-                'expected_map_db'        => true,
-                'expected'               => false
+                'expected_map_db' => true,
+                'expected' => false
             )
         );
     }
@@ -202,30 +202,30 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
         $role_obj->set_parent_id(null);
         return array(
             '0' => array(
-                'input'                  => array(
-                    'id'           => '8',
+                'input' => array(
+                    'id' => '8',
                     'account_name' => 'manhnd',
-                    'staff_name'   => 'aaa',
-                    'password'     => '123456',
-                    'address'      => 'asw huy6',
-                    'roles'        => array()
+                    'staff_name' => 'aaa',
+                    'password' => '123456',
+                    'address' => 'asw huy6',
+                    'roles' => array()
                 ),
                 'expected_read_role_obj' => $role_obj,
-                'expected_map_db'        => true,
-                'expected'               => false
+                'expected_map_db' => true,
+                'expected' => false
             ),
             '1' => array(
-                'input'                  => array(
-                    'id'           => '2',
+                'input' => array(
+                    'id' => '2',
                     'account_name' => 'fsdfg',
-                    'staff_name'   => 'aa33a',
-                    'password'     => '123456',
-                    'address'      => 'asw huy6',
-                    'roles'        => array()
+                    'staff_name' => 'aa33a',
+                    'password' => '123456',
+                    'address' => 'asw huy6',
+                    'roles' => array()
                 ),
                 'expected_read_role_obj' => $role_obj,
-                'expected_map_db'        => true,
-                'expected'               => false
+                'expected_map_db' => true,
+                'expected' => false
             )
         );
     }
@@ -266,12 +266,16 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
     {
         return array(
             '0' => array(
-                'expected_load_acc_info' => array(),
-                'expected'               => array()
+                'expected_load_acc_info' => array(
+
+                ),
+                'expected' => array()
             ),
             '1' => array(
-                'expected_load_acc_info' => array(),
-                'expected'               => array()
+                'expected_load_acc_info' => array(
+
+                ),
+                'expected' => array()
             ),
         );
     }
@@ -313,14 +317,14 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
     {
         return array(
             '0' => array(
-                'input'                    => '8',
+                'input' => '8',
                 'expected_load_roles_info' => array(),
-                'expected'                 => array()
+                'expected' => array()
             ),
             '1' => array(
-                'input'                    => '0',
+                'input' => '0',
                 'expected_load_roles_info' => array(),
-                'expected'                 => array()
+                'expected' => array()
             ),
         );
     }
@@ -333,7 +337,7 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
      * @dataProvider providerTestMapDbHasNoId
      */
     public function testMapDbHasNoId($input, $expected_model_acc_insert, $expected_model_rbac_assign_acc_role,
-                                     $expected)
+                                        $expected)
     {
 //        //Build mock for InkiuAccountFactory class
 //        $mock_factory = $this->getMockBuilder('\super_classes\InkiuAccountFactory')
@@ -367,30 +371,30 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
     {
         return array(
             '0' => array(
-                'input'                               => array(
-                    'id'           => null,
+                'input' => array(
+                    'id' => null,
                     'account_name' => 'manhnd',
-                    'staff_name'   => 'Nguyen Duc Manh',
-                    'password'     => '123456',
-                    'address'      => '321dsfsd',
-                    'roles'        => array()
+                    'staff_name' => 'Nguyen Duc Manh',
+                    'password' => '123456',
+                    'address' => '321dsfsd',
+                    'roles' => array()
                 ),
-                'expected_model_acc_insert'           => '8',
+                'expected_model_acc_insert' => '8',
                 'expected_model_rbac_assign_acc_role' => true,
-                'expected'                            => true,
+                'expected' => true,
             ),
             '1' => array(
-                'input'                               => array(
-                    'id'           => null,
+                'input' => array(
+                    'id' => null,
                     'account_name' => 'manhnd',
-                    'staff_name'   => 'Nguyen Duc Manh',
-                    'password'     => '123456',
-                    'address'      => '321dsfsd',
-                    'roles'        => array()
+                    'staff_name' => 'Nguyen Duc Manh',
+                    'password' => '123456',
+                    'address' => '321dsfsd',
+                    'roles' => array()
                 ),
-                'expected_model_acc_insert'           => '0',
+                'expected_model_acc_insert' => '0',
                 'expected_model_rbac_assign_acc_role' => true,
-                'expected'                            => true,
+                'expected' => true,
             ),
         );
     }
@@ -404,7 +408,7 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
      * @dataProvider providerTestMapDbHasId
      */
     public function testMapDbHasId($input, $expected_model_acc_update, $expected_model_rbac_unassign_acc_roles,
-                                   $expected_model_rbac_assign_acc_role, $expected)
+                                     $expected_model_rbac_assign_acc_role, $expected)
     {
         //Build mock for InkiuAccountFactory class
         $mock_factory = $this->getMockBuilder('\super_classes\InkiuAccountFactory')
@@ -443,32 +447,32 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
     {
         return array(
             '0' => array(
-                'input'                                  => array(
-                    'id'           => '8',
+                'input' => array(
+                    'id' => '8',
                     'account_name' => 'manhnd',
-                    'staff_name'   => 'Nguyen Duc Manh',
-                    'password'     => '123456',
-                    'address'      => '321dsfsd',
-                    'roles'        => array()
+                    'staff_name' => 'Nguyen Duc Manh',
+                    'password' => '123456',
+                    'address' => '321dsfsd',
+                    'roles' => array()
                 ),
-                'expected_model_acc_update'              => true,
+                'expected_model_acc_update' => true,
                 'expected_model_rbac_unassign_acc_roles' => true,
-                'expected_model_rbac_assign_acc_role'    => true,
-                'expected'                               => true,
+                'expected_model_rbac_assign_acc_role' => true,
+                'expected' => true,
             ),
             '1' => array(
-                'input'                                  => array(
-                    'id'           => '0',
+                'input' => array(
+                    'id' => '0',
                     'account_name' => 'gdfg',
-                    'staff_name'   => 'Nguyen Duc r5t5',
-                    'password'     => '123456',
-                    'address'      => '4de',
-                    'roles'        => array()
+                    'staff_name' => 'Nguyen Duc r5t5',
+                    'password' => '123456',
+                    'address' => '4de',
+                    'roles' => array()
                 ),
-                'expected_model_acc_update'              => true,
+                'expected_model_acc_update' => true,
                 'expected_model_rbac_unassign_acc_roles' => true,
-                'expected_model_rbac_assign_acc_role'    => true,
-                'expected'                               => true,
+                'expected_model_rbac_assign_acc_role' => true,
+                'expected' => true,
             ),
         );
     }
@@ -523,26 +527,26 @@ class InkiuAccountFactoryTest extends PHPUnit_Framework_TestCase
         $session = null;
         return array(
             '0' => array(
-                'info'                               => array(
+                'info' => array(
                     'acc_name' => 'manhnd',
                     'password' => '123456'
                 ),
-                'session'                            => $session,
-                'expected_validate'                  => true,
-                'expected_store_data_to_session'     => true,
+                'session' => $session,
+                'expected_validate' => true,
+                'expected_store_data_to_session' => true,
                 '$expected_model_acc_get_id_by_name' => '8',
-                'expected'                           => true
+                'expected' => true
             ),
             '1' => array(
-                'info'                               => array(
+                'info' => array(
                     'acc_name' => 'manhnd',
                     'password' => '123456'
                 ),
-                'session'                            => $session,
-                'expected_validate'                  => false,
-                'expected_store_data_to_session'     => false,
+                'session' => $session,
+                'expected_validate' => false,
+                'expected_store_data_to_session' => false,
                 '$expected_model_acc_get_id_by_name' => '0',
-                'expected'                           => false
+                'expected' => false
             ),
         );
     }

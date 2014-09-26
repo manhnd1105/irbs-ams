@@ -9,7 +9,14 @@
 namespace super_classes;
 
 
+/**
+ * Interface ISingleton
+ * @package super_classes
+ */
 interface ISingleton
 {
+    /**
+     * @return mixed
+     */
     static function get_instance();
 } 
