@@ -12,10 +12,14 @@ namespace super_classes;
  * Class RbacRoleFactory
  * @package super_classes
  */
+/**
+ * Class RbacRoleFactory
+ * @package super_classes
+ */
 class RbacRoleFactory implements ISingleton
 {
     /**
-     * @var
+     * @var RbacRoleFactory
      */
     private static $instance;
 
@@ -23,6 +27,7 @@ class RbacRoleFactory implements ISingleton
      * @var \Model_rbac_role
      */
     private $model_rbac_role;
+
     /**
      * Private constructor so nobody else can instance it
      *
@@ -39,9 +44,7 @@ class RbacRoleFactory implements ISingleton
      *
      * @return void
      */
-    private function __clone()
-    {
-    }
+    private function __clone() {}
 
     /**
      * Call this method to get singleton
@@ -50,14 +53,17 @@ class RbacRoleFactory implements ISingleton
      */
     public static function get_instance()
     {
-        try {
-            if (!self::$instance) {
+        try
+        {
+            if (!self::$instance)
+            {
                 self::$instance = new RbacRoleFactory();
             }
             return self::$instance;
 
-        } catch (Exception $e) {
-            //throw $e->getMessage();
+        } catch (\Exception $e)
+        {
+            IrbsException::write_log('error', $e);
         }
     }
 
@@ -67,17 +73,22 @@ class RbacRoleFactory implements ISingleton
      */
     public function reset_all()
     {
-        try {
+        try
+        {
             $status = $this->model_rbac_role_reset_all();
-        } catch (\Exception $e) {
-            log_message($e->getMessage());
+        } catch (\Exception $e)
+        {
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
     }
+
+    /**
+     * @return bool
+     */
     function model_rbac_role_reset_all(){
-        $this->model_rbac_role->reset_all();
-        return true;
+        return $this->model_rbac_role->reset_all();
     }
 
 
@@ -125,7 +136,7 @@ class RbacRoleFactory implements ISingleton
     /**
      * Get information of a role and then return an object
      * @param int $id
-     * @return role obj
+     * @return RbacRole
      */
     public function read_role_obj($id)
     {
@@ -166,14 +177,16 @@ class RbacRoleFactory implements ISingleton
      */
     public function update_role($info)
     {
-        try{
+        try
+        {
             //Update object by passed information
             $role = $this->update_role_obj($info);
 
             //Save changes to database
             $status = $this->map_db($role);
-        }catch(\Exception $e){
-            echo $e->getMessage();
+        } catch (\Exception $e)
+        {
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
@@ -197,21 +210,26 @@ class RbacRoleFactory implements ISingleton
      * @return bool
      */
     public function delete_role($id){
-        try {
+        try
+        {
             $status = $this->model_rbac_role_delete($id);
-        } catch (\Exception $e) {
-            log_message($e->getMessage());
+        } catch (\Exception $e)
+        {
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
     }
 
 
+    /**
+     * @param $id
+     * @return bool
+     */
     function model_rbac_role_delete($id)
     {
         $this->model_rbac_role->remove($id);
         return true;
-
     }
 
 
@@ -236,17 +254,26 @@ class RbacRoleFactory implements ISingleton
             else {
                $this->model_rbac_modify($info);
             }
-        } catch (\Exception $e) {
-            echo $e->getMessage();
+        } catch (\Exception $e)
+        {
+            IrbsException::write_log('error', $e);
             return false;
         }
         return true;
     }
 
+    /**
+     * @param $info
+     * @return mixed
+     */
     function model_rbac_insert($info){
         return  $this->model_rbac_role->insert($info);
     }
 
+    /**
+     * @param $info
+     * @return bool
+     */
     function model_rbac_modify($info){
         return  $this->model_rbac_role->modify($info);
     }
@@ -268,6 +295,10 @@ class RbacRoleFactory implements ISingleton
 
     }
 
+    /**
+     * @param $sample
+     * @return bool
+     */
     function model_rbac_role_make_sample($sample){
         return  $this->model_rbac_role->make_sample($sample);
 

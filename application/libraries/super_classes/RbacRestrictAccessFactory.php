@@ -15,9 +15,13 @@ use PhpRbac\Rbac;
  */
 class RbacRestrictAccessFactory
 {
-    private $rbac;
     /**
-     * @var
+     * @var \PhpRbac\Rbac
+     */
+    private $rbac;
+
+    /**
+     * @var RbacRestrictAccessFactory
      */
     private static $instance;
 
@@ -36,9 +40,7 @@ class RbacRestrictAccessFactory
      *
      * @return void
      */
-    private function __clone()
-    {
-    }
+    private function __clone(){}
 
     /**
      * Call this method to get singleton
@@ -53,8 +55,8 @@ class RbacRestrictAccessFactory
             }
             return self::$instance;
 
-        } catch (Exception $e) {
-            throw $e->getMessage();
+        } catch (\Exception $e) {
+            IrbsException::write_log('error', $e);
         }
     }
 
@@ -75,12 +77,16 @@ class RbacRestrictAccessFactory
             $status = $this->rbac->check($perm_id, $acc_id);
         } catch (\Exception $e)
         {
-//            log_message($e->getMessage());
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
     }
 
+    /**
+     * @param $perm_path
+     * @return int
+     */
     private function find_path_id($perm_path)
     {
         return $this->rbac->Permissions->pathId($perm_path);

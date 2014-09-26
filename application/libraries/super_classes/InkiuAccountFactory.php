@@ -5,6 +5,10 @@ namespace super_classes;
  * Class InkiuAccountFactory
  * @package super_classes
  */
+/**
+ * Class InkiuAccountFactory
+ * @package super_classes
+ */
 class InkiuAccountFactory implements ISingleton
 {
 
@@ -20,7 +24,14 @@ class InkiuAccountFactory implements ISingleton
      */
     private static $instance;
 
+    /**
+     * @var \Model_account
+     */
     private $model_account;
+
+    /**
+     * @var \Model_rbac_assigning
+     */
     private $model_rbac_assigning;
     
     /**
@@ -43,13 +54,11 @@ class InkiuAccountFactory implements ISingleton
      * Private clone method to prevent cloning of the instance of the Singleton instance
      * @return void
      */
-    private function __clone()
-    {
-    }
+    private function __clone(){}
 
     /**
      * Call this method to get singleton
-     * @return RoleFactory
+     * @return InkiuAccountFactory
      */
     public static function get_instance()
     {
@@ -59,8 +68,8 @@ class InkiuAccountFactory implements ISingleton
             }
             return self::$instance;
 
-        } catch (Exception $e) {
-            echo 'error: ' . $e->getMessage();
+        } catch (\Exception $e) {
+            IrbsException::write_log('error', $e);
         }
     }
 
@@ -88,12 +97,17 @@ class InkiuAccountFactory implements ISingleton
             //Save changes to database
             $status = $this->map_db($acc);
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
     }
 
+
+    /**
+     * @param int $id
+     * @return RbacRole
+     */
     public function read_role_obj($id)
     {
         return $this->rbac_role_factory->read_role_obj($id);
@@ -137,7 +151,7 @@ class InkiuAccountFactory implements ISingleton
             //Save changes of that object into database
             $this->map_db($acc);
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -248,7 +262,7 @@ class InkiuAccountFactory implements ISingleton
             }
         } catch (\Exception $e)
         {
-            log_message($e->getMessage());
+            IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -284,10 +298,20 @@ class InkiuAccountFactory implements ISingleton
         return true;
     }
 
+    /**
+     * @param $info
+     * @return mixed
+     */
     function model_acc_insert($info)
     {
         return $this->model_account->insert($info);
     }
+
+    /**
+     * @param $role_id
+     * @param $acc_id
+     * @return mixed
+     */
     function model_rbac_assign_acc_role($role_id, $acc_id)
     {
         return $this->model_rbac_assigning->assign_acc_role($role_id, $acc_id);
@@ -333,10 +357,19 @@ class InkiuAccountFactory implements ISingleton
         return true;
     }
 
+    /**
+     * @param $info
+     * @return mixed
+     */
     function model_acc_update($info)
     {
         return $this->model_account->update($info);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     function model_rbac_unassign_acc_roles($id)
     {
         return $this->model_rbac_assigning->unassign_acc_roles($id);
@@ -382,14 +415,18 @@ class InkiuAccountFactory implements ISingleton
         return true;
     }
 
+    /**
+     * @param $acc_name
+     * @return mixed
+     */
     function model_acc_get_id_by_name($acc_name)
     {
         return $this->model_account->get_id_by_name($acc_name);
     }
     /**
      * Push data into session
-     * @param $data
-     * @param $session
+     * @param array $data
+     * @param \CI_Session $session
      * @return bool
      */
     public function store_data_to_session($data, $session)
@@ -400,7 +437,7 @@ class InkiuAccountFactory implements ISingleton
             $session->set_userdata($data);
         } catch (\Exception $e)
         {
-            log_message($e->getMessage());
+            IrbsException::write_log('error', $e);
             return false;
         }
         return true;

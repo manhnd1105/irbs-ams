@@ -17,11 +17,15 @@ class RbacAssigningFactory implements ISingleton
 {
     /**
      * Used to hold Singleton instance
-     * @var
+     * @var RbacAssigningFactory
      */
     private static $instance;
 
+    /**
+     * @var \Model_rbac_assigning
+     */
     private $model_rbac_assigning;
+
     /**
      * Private constructor so nobody else can instance it
      *
@@ -39,9 +43,7 @@ class RbacAssigningFactory implements ISingleton
      *
      * @return void
      */
-    private function __clone()
-    {
-    }
+    private function __clone(){}
 
     /**
      * Call this method to get singleton
@@ -55,8 +57,8 @@ class RbacAssigningFactory implements ISingleton
             }
             return self::$instance;
 
-        } catch (Exception $e) {
-            throw $e->getMessage();
+        } catch (\Exception $e) {
+            IrbsException::write_log('error', $e);
         }
     }
 
@@ -86,9 +88,9 @@ class RbacAssigningFactory implements ISingleton
             {
                 $this->assign_role_perm($role_id, $row);
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -110,9 +112,9 @@ class RbacAssigningFactory implements ISingleton
             {
                 $this->assign_role_perm($row, $perm_id);
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -187,9 +189,9 @@ class RbacAssigningFactory implements ISingleton
             {
                 $this->assign_acc_role($role_id, $row);
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -282,6 +284,10 @@ class RbacAssigningFactory implements ISingleton
         return $result;
     }
 
+    /**
+     * @param $acc_id
+     * @return mixed
+     */
     public function get_acc_assigned_roles($acc_id)
     {
         return $this->model_rbac_assigning->get_acc_assigned_roles($acc_id);

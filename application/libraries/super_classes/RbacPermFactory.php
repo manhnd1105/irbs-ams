@@ -17,10 +17,13 @@ use SebastianBergmann\Exporter\Exception;
 class RbacPermFactory implements ISingleton
 {
     /**
-     * @var
+     * @var RbacPermFactory
      */
     private static $instance;
 
+    /**
+     * @var \Model_rbac_perm
+     */
     private $model_rbac_perm;
     /**
      * Private constructor so nobody else can instance it
@@ -39,9 +42,7 @@ class RbacPermFactory implements ISingleton
      *
      * @return void
      */
-    private function __clone()
-    {
-    }
+    private function __clone(){}
 
     /**
      * Call this method to get singleton
@@ -56,11 +57,14 @@ class RbacPermFactory implements ISingleton
             }
             return self::$instance;
 
-        } catch (Exception $e) {
-            //throw $e->getMessage();
+        } catch (\Exception $e) {
+            IrbsException::write_log('error', $e);
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function reset_all()
     {
         return $this->model_rbac_perm->reset_all();
@@ -74,6 +78,7 @@ class RbacPermFactory implements ISingleton
      */
     public function create_perm_obj($info)
     {
+        $perm = null;
         try
         {
             //Create a new object and fill it with information
@@ -82,7 +87,7 @@ class RbacPermFactory implements ISingleton
             $perm->set_title($info);
             $perm->set_desc($info);
         } catch (\Exception $e) {
-            throw $e;
+            IrbsException::write_log('error', $e);
         }
         return $perm;
     }
@@ -94,15 +99,16 @@ class RbacPermFactory implements ISingleton
      */
     public function create_perm($info)
     {
-        try{
+        try
+        {
             //Create object from passed information
             $perm = $this->create_perm_obj($info);
             $perm->set_parent_id($info);
 
             //Save changes into database
             $status = $this->map_db($perm);
-        }catch (\Exception $e){
-            echo $e->getMessage();
+        } catch (\Exception $e) {
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
@@ -148,14 +154,16 @@ class RbacPermFactory implements ISingleton
      */
     public function update_perm($info)
     {
-        try{
+        try
+        {
             //Update object by passed information
             $perm = $this->update_perm_obj($info);
 
             //Save changes to database
             $status = $this->map_db($perm);
-        }catch(\Exception $e){
-            echo $e->getMessage();
+        } catch (\Exception $e)
+        {
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
@@ -178,10 +186,11 @@ class RbacPermFactory implements ISingleton
      */
     public function delete_perm($id)
     {
-        try {
+        try
+        {
             $status = $this->model_rbac_perm_remove($id);
         } catch (\Exception $e) {
-            log_message($e->getMessage());
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
@@ -207,7 +216,7 @@ class RbacPermFactory implements ISingleton
             $status = $this->model_rbac_perm_remove_path($path);
         } catch (\Exception $e)
         {
-            log_message($e->getMessage());
+            IrbsException::write_log('error', $e);
             return false;
         }
         return $status;
@@ -243,7 +252,7 @@ class RbacPermFactory implements ISingleton
                 $this->map_db_has_id($info);
             }
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -274,7 +283,7 @@ class RbacPermFactory implements ISingleton
         $rbac_perm_id = $info['id'];
         if($rbac_perm_id == null ||$rbac_perm_id == '') {
             return false;
-        }else{
+        } else {
             $status = $this->model_rbac_perm_modify($info);
             return true;
         }
@@ -289,7 +298,9 @@ class RbacPermFactory implements ISingleton
     }
 
 
-
+    /**
+     * @return mixed
+     */
     public function make_sample()
     {
         $sample = array(
