@@ -18,7 +18,6 @@ class Model_rbac_assigning
      */
     function __construct()
     {
-//        parent::__construct();
         $this->rbac = new \PhpRbac\Rbac();
     }
 
@@ -63,9 +62,9 @@ class Model_rbac_assigning
                     throw new Exception('Error while asking rbac Roles to assign role ' . $role_id . 'to descendants perms of the perm ' . $perm_id);
                 }
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -105,9 +104,9 @@ class Model_rbac_assigning
                     }
                 }
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -145,9 +144,9 @@ class Model_rbac_assigning
         try
         {
             $this->rbac->Permissions->unassignRoles($perm_id);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            log_message($e->getMessage());
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -176,9 +175,9 @@ class Model_rbac_assigning
                 }
             }
 
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -194,9 +193,9 @@ class Model_rbac_assigning
         try
         {
             $this->rbac->Roles->unassignPermissions($role_id);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -214,10 +213,9 @@ class Model_rbac_assigning
         {
             //Assign selected roles to an account
             $this->rbac->Users->assign($role_id, $acc_id);
-
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -238,9 +236,9 @@ class Model_rbac_assigning
                 $this->rbac->Users->assign($role_id, $acc_id);
 
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -258,9 +256,9 @@ class Model_rbac_assigning
         {
             //Assign selected roles to an account
             $this->rbac->Users->unassign($role_id, $acc_id);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -280,9 +278,9 @@ class Model_rbac_assigning
             {
                 $this->rbac->Users->unassign($row, $acc_id);
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;

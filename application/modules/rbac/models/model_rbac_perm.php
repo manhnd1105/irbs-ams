@@ -19,7 +19,6 @@ class Model_rbac_perm
      */
     function __construct()
     {
-//        parent::__construct();
         $this->rbac = new \PhpRbac\Rbac();
     }
 
@@ -33,8 +32,9 @@ class Model_rbac_perm
         {
             $this->rbac->Permissions->reset(true);
         }
-        catch (Exception $e)
+        catch (\Exception $e)
         {
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -101,9 +101,9 @@ class Model_rbac_perm
         try
         {
             $this->rbac->Permissions->add($info['title'], $info['desc'], $info['parent_id']);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -120,9 +120,9 @@ class Model_rbac_perm
         {
             $rbac_path = $info['path'] . '/' . $info['title'];
             $this->rbac->Permissions->addPath($rbac_path, $info['desc']);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -138,9 +138,9 @@ class Model_rbac_perm
         try
         {
             $this->rbac->Permissions->edit($info['id'], $info['title'], $info['desc']);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -156,9 +156,9 @@ class Model_rbac_perm
         try
         {
 
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -174,9 +174,9 @@ class Model_rbac_perm
         try
         {
 
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -192,9 +192,9 @@ class Model_rbac_perm
         try
         {
             $this->rbac->Permissions->remove($id);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -213,9 +213,9 @@ class Model_rbac_perm
             {
                 $this->rbac->Permissions->addPath('/irbs/' . $row);
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            log_message($e->getMessage());
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
     }
