@@ -205,7 +205,7 @@ class Model_rbac_perm
             echo $e->getMessage();
             return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -226,6 +226,5 @@ class Model_rbac_perm
             log_message($e->getMessage());
             return false;
         }
-        return true;
     }
 } 

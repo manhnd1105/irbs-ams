@@ -17,7 +17,6 @@ class Model_rbac_role
      */
     function __construct()
     {
-//        parent::__construct();
         $this->rbac = new \PhpRbac\Rbac();
     }
 
@@ -29,9 +28,9 @@ class Model_rbac_role
         try
         {
             $this->rbac->Roles->reset(true);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            log_message($e->getMessage());
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -98,9 +97,9 @@ class Model_rbac_role
         try
         {
             $inserted_id = $this->rbac->Roles->add($info['title'], $info['desc'], $info['parent_id']);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return $inserted_id;
@@ -117,9 +116,9 @@ class Model_rbac_role
         {
             $rbac_path = $info['path'] . '/' . $info['title'];
             $this->rbac->Roles->addPath($rbac_path, $info['desc']);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -135,9 +134,9 @@ class Model_rbac_role
         try
         {
             $this->rbac->Roles->edit($info['id'], $info['title'], $info['desc']);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -155,7 +154,7 @@ class Model_rbac_role
 
         } catch (Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -171,9 +170,9 @@ class Model_rbac_role
         try
         {
 
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -189,9 +188,9 @@ class Model_rbac_role
         try
         {
             $this->rbac->Roles->remove($id);
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            echo $e->getMessage();
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;
@@ -210,9 +209,9 @@ class Model_rbac_role
             {
                 $this->rbac->Roles->addPath('/irbs/' . $row);
             }
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            log_message($e->getMessage());
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
     }
@@ -236,9 +235,9 @@ class Model_rbac_role
                 $this->rbac->Roles->assign($unauthorized_role_id, $row);
             }
 
-        } catch (Exception $e)
+        } catch (\Exception $e)
         {
-            log_message($e->getMessage());
+            \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
         return true;

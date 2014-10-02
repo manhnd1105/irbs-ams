@@ -8,15 +8,19 @@
 
 class Test_controller extends Frontend_Controller
 {
-    private $factory;
     function __construct()
     {
         parent::__construct();
-        $this->factory = \super_classes\TestFactory::get_instance();
     }
 
     public function index()
     {
-        echo $this->factory->test();
+        try
+        {
+            throw new Exception('test exception');
+        } catch (Exception $e)
+        {
+            \super_classes\IrbsException::write_log('error', $e);
+        }
     }
 } 
