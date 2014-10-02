@@ -54,6 +54,8 @@ CREATE TABLE `file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `path` varchar(45) DEFAULT NULL,
+  `size` int(11) NOT NULL,
+  `type` varchar(20) NOT NULL
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -64,7 +66,10 @@ CREATE TABLE `file` (
 
 LOCK TABLES `file` WRITE;
 /*!40000 ALTER TABLE `file` DISABLE KEYS */;
-INSERT INTO `file` VALUES (1,'diep','o D'),(15,'thieuhiep','fghty678'),(17,'dfyu','45');
+INSERT INTO `file` VALUES
+(1,'rose','path image',123292,'PNG'),
+(2,'tulip','path image',232132,'PNG'),
+(3,'blossom','path image',121211,'PNG'),
 /*!40000 ALTER TABLE `file` ENABLE KEYS */;
 UNLOCK TABLES;
 
