@@ -47,11 +47,13 @@ class DBUnitTestUtility{
             ),
             'file'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.file;',
-                'CREATE TABLE '.self::$nameDBtesting.'.file SELECT * FROM '.self::$nameDBSource.'.file'
+                'CREATE TABLE '.self::$nameDBtesting.'.file SELECT * FROM '.self::$nameDBSource.'.file',
+                'ALTER TABLE file MODIFY id INT AUTO_INCREMENT, ADD PRIMARY KEY (id)'
             ),
             'inkiu_account'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.inkiu_account;',
-                'CREATE TABLE '.self::$nameDBtesting.'.inkiu_account SELECT * FROM '.self::$nameDBSource.'.inkiu_account'
+                'CREATE TABLE '.self::$nameDBtesting.'.inkiu_account SELECT * FROM '.self::$nameDBSource.'.inkiu_account',
+                'ALTER TABLE inkiu_account MODIFY id INT AUTO_INCREMENT, ADD PRIMARY KEY (id)'
             ),
             'inkiu_order'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.inkiu_order;',
@@ -59,11 +61,13 @@ class DBUnitTestUtility{
             ),
             'order'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.order;',
-                'CREATE TABLE '.self::$nameDBtesting.'.order SELECT * FROM '.self::$nameDBSource.'.order'
+                'CREATE TABLE '.self::$nameDBtesting.'.order SELECT * FROM '.self::$nameDBSource.'.order',
+                'ALTER TABLE order MODIFY id INT AUTO_INCREMENT, ADD PRIMARY KEY (id)'
             ),
             'order_component'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.order_component;',
-                'CREATE TABLE '.self::$nameDBtesting.'.order_component SELECT * FROM '.self::$nameDBSource.'.order_component'
+                'CREATE TABLE '.self::$nameDBtesting.'.order_component SELECT * FROM '.self::$nameDBSource.'.order_component',
+                'ALTER TABLE order_component MODIFY id INT AUTO_INCREMENT, ADD PRIMARY KEY (id)'
             ),
             'order_component_feedback'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.order_component_feedback;',
@@ -71,7 +75,8 @@ class DBUnitTestUtility{
             ),
             'order_component_image'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.order_component_image;',
-                'CREATE TABLE '.self::$nameDBtesting.'.order_component_image SELECT * FROM '.self::$nameDBSource.'.order_component_image'
+                'CREATE TABLE '.self::$nameDBtesting.'.order_component_image SELECT * FROM '.self::$nameDBSource.'.order_component_image',
+                'ALTER TABLE order_component_image MODIFY id INT AUTO_INCREMENT, ADD PRIMARY KEY (id)'
             ),
             'order_component_level'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.order_component_level;',
@@ -87,7 +92,8 @@ class DBUnitTestUtility{
             ),
             'rbac_permissions'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.rbac_permissions;',
-                'CREATE TABLE '.self::$nameDBtesting.'.rbac_permissions SELECT * FROM '.self::$nameDBSource.'.rbac_permissions'
+                'CREATE TABLE '.self::$nameDBtesting.'.rbac_permissions SELECT * FROM '.self::$nameDBSource.'.rbac_permissions',
+                'ALTER TABLE rbac_permissions MODIFY ID INT AUTO_INCREMENT, ADD PRIMARY KEY (ID)'
             ),
             'rbac_rolepermissions'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.rbac_rolepermissions;',
@@ -95,7 +101,8 @@ class DBUnitTestUtility{
             ),
             'rbac_roles'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.rbac_roles;',
-                'CREATE TABLE '.self::$nameDBtesting.'.rbac_roles SELECT * FROM '.self::$nameDBSource.'.rbac_roles'
+                'CREATE TABLE '.self::$nameDBtesting.'.rbac_roles SELECT * FROM '.self::$nameDBSource.'.rbac_roles',
+                'ALTER TABLE rbac_roles MODIFY ID INT AUTO_INCREMENT, ADD PRIMARY KEY (ID)'
             ),
             'rbac_userroles'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.rbac_userroles;',

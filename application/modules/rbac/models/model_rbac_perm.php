@@ -19,8 +19,12 @@ class Model_rbac_perm
      */
     function __construct()
     {
+        if (defined('PHPUNIT_TEST')) {
+            $this->rbac = new \PhpRbac\Rbac('unit_test');
+        }else{
+            $this->rbac = new \PhpRbac\Rbac();
+        }
 //        parent::__construct();
-        $this->rbac = new \PhpRbac\Rbac();
     }
 
     /**
@@ -191,13 +195,17 @@ class Model_rbac_perm
     {
         try
         {
-            $this->rbac->Permissions->remove($id);
+            if($id > 0){
+                $this->rbac->Permissions->remove($id);
+                return true;
+            }
+
         } catch (Exception $e)
         {
             echo $e->getMessage();
             return false;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -218,5 +226,6 @@ class Model_rbac_perm
             log_message($e->getMessage());
             return false;
         }
+        return true;
     }
 } 
