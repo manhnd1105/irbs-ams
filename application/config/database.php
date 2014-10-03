@@ -48,11 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['remote']['hostname'] = '123.30.238.216:1105';
+$db['remote']['hostname'] = 'mysql:host=123.30.238.216:1105';
 $db['remote']['username'] = 'manhnd';
 $db['remote']['password'] = 'password';
 $db['remote']['database'] = 'irbs';
-$db['remote']['dbdriver'] = 'mysql';
+$db['remote']['dbdriver'] = 'pdo';
 $db['remote']['dbprefix'] = '';
 $db['remote']['pconnect'] = TRUE;
 $db['remote']['db_debug'] = TRUE;
@@ -64,11 +64,11 @@ $db['remote']['swap_pre'] = '';
 $db['remote']['autoinit'] = TRUE;
 $db['remote']['stricton'] = FALSE;
 
-$db['default']['hostname'] = '127.0.0.1';
+$db['default']['hostname'] = 'mysql:host=127.0.0.1';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'irbs';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbdriver'] = 'pdo';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
