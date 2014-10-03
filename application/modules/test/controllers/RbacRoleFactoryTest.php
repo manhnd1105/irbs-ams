@@ -1,7 +1,7 @@
 <?php
-//
-//class RbacRoleFactoryTest extends PHPUnit_Framework_TestCase {
-//
+
+class RbacRoleFactoryTest extends PHPUnit_Framework_TestCase {
+
 //    /**
 //     * Call protected/private method of a class.
 //     *
@@ -446,4 +446,8 @@
 //            )
 //        );
 //    }
-//}
+
+    public function test()
+    {
+    }
+}

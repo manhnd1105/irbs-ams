@@ -43,8 +43,7 @@ class Account_controller extends Frontend_Controller
 
         //Response transaction status to client
         $response = array(
-            'status' => ($status) ? 'Created' : 'Error',
-            'roles_id' => $post['roles_id']
+            'status' => ($status) ? 'Created' : 'Error'
         );
         print_r($response);
     }
@@ -77,11 +76,13 @@ class Account_controller extends Frontend_Controller
 
     /**
      * Delete an account
-     * @param int $id
      */
-    public function delete($id)
+    public function delete()
     {
         //Get information from POST and then assign to factory performing
+        $post = $this->input->post();
+        $id = $post['entity_id'];
+
         $status = $this->account_factory->remove_account($id);
 
         //Response transaction status to client
@@ -97,9 +98,13 @@ class Account_controller extends Frontend_Controller
      */
     public function view_create()
     {
-        //Get roles list from database
-        $data['role_tree'] = $this->rbac_role_factory->read_roles_html();
-        $this->render('account', '/account_create', $data);
+        //Get information from POST
+        $post = $this->input->post();
+
+        //Render a page and pass needed data to it
+        $data['parent_id'] = $post['entity_id'];
+        $data['form_action'] = 'account/account_controller/create';
+        $this->load->view('account_create', $data);
     }
 
     /**
@@ -107,36 +112,40 @@ class Account_controller extends Frontend_Controller
      */
     public function index()
     {
-        //Get all accounts information from database
-        $info = $this->account_factory->load_accounts_info();
-        //TODO create processing data layer for displaying to view using Decorator pattern
-        $data['info'] = $info;
-        $this->render('account', '/account_crud', $data);
+//        //Get all accounts information from database
+        $data['acc_tree'] = $this->account_factory->load_accounts_info_html();
+         $this->render('account', '/index', $data);
     }
 
     /**
      * Render a page for updating account operation
-     * @param $id
      */
-    public function view_update($id)
+    public function view_update()
     {
-        $data['info'] = $this->account_factory->load_accounts_info($id);
-        $data['role_tree'] = $this->rbac_role_factory->read_roles_html();
-        $this->render('account', '/account_update', $data);
+        //Get information from POST
+        $post = $this->input->post();
+
+        //Get saved information from database
+        $info = $this->account_factory->load_accounts_info($post['entity_id']);
+
+        //Render a page and pass needed data to it
+        $data['info'] = $info;
+        $data['form_action'] = 'account/account_controller/update';
+        $this->load->view('account_update', $data);
     }
 
-    /**
-     * Render a page for updating account operation (serving for ajax call)
-     * @param $id
-     */
-    public function view_update_ajax($id)
-    {
-        //Load saved roles id from database
-        $saved_ids = $this->rbac_role_factory->get_acc_assigned_roles_id($id);
-
-        //Send saved roles id to ajax callback
-        echo json_encode($saved_ids);
-    }
+//    /**
+//     * Render a page for updating account operation (serving for ajax call)
+//     * @param $id
+//     */
+//    public function view_update_ajax($id)
+//    {
+//        //Load saved roles id from database
+//        $saved_ids = $this->rbac_role_factory->get_acc_assigned_roles_id($id);
+//
+//        //Send saved roles id to ajax callback
+//        echo json_encode($saved_ids);
+//    }
 
     /**
      * Render a page based on chosen template
@@ -169,15 +178,23 @@ class Account_controller extends Frontend_Controller
 
     /**
      * Get list all roles that was assigned to this account
-     * @param int $id the id of account need to view roles
      */
-    public function list_roles($id)
+    public function list_roles()
     {
-        $roles = $this->rbac_assigning_factory->get_acc_assigned_roles_html($id);
+        //Get input from POST
+        $post = $this->input->post();
+
+        $roles = $this->rbac_assigning_factory->get_acc_assigned_roles_html($post['entity_id']);
 
         $data['role_list'] = $roles;
         $data['back_to_main'] = 'account/account_controller';
-        $this->render('rbac', '/role_assigned', $data);
+//        $this->render('rbac', '/role_assigned', $data);
+        $this->template_controller->demo_template('rbac', '/role_assigned', $data);
+    }
+
+    function test()
+    {
+        $this->account_factory->test();
     }
 }
 

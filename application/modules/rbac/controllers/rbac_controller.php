@@ -119,7 +119,8 @@ class Rbac_controller extends Frontend_Controller
         $data['acc_list'] = $this->acc_factory->load_accounts_info_links();
 
         //Display to view
-        $this->render('rbac', '/acc_assign_roles', $data);
+//        $this->render('rbac', '/acc_assign_roles', $data);
+        $this->load->view('acc_assign_roles', $data);
     }
 
     /**
