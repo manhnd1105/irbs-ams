@@ -5,10 +5,6 @@ namespace super_classes;
  * Class InkiuAccountFactory
  * @package super_classes
  */
-/**
- * Class InkiuAccountFactory
- * @package super_classes
- */
 class InkiuAccountFactory implements ISingleton
 {
 
@@ -80,20 +76,21 @@ class InkiuAccountFactory implements ISingleton
      */
     public function create_account($info)
     {
-        try {
+        try
+        {
             //Create Account object and fill it with basic information (except roles)
             $acc = $this->create_account_obj($info);
 
-            //Assign roles to this Account instance
-            if (isset($info['roles_id']))
-            {
-                foreach ($info['roles_id'] as $row)
-                {
-                    //Load role obj
-                    $role_obj = $this->read_role_obj($row);
-                    $acc->assign_role($role_obj);
-                }
-            }
+//            //Assign roles to this Account instance
+//            if (isset($info['roles_id']))
+//            {
+//                foreach ($info['roles_id'] as $row)
+//                {
+//                    //Load role obj
+//                    $role_obj = $this->read_role_obj($row);
+//                    $acc->assign_role($role_obj);
+//                }
+//            }
             //Save changes to database
             $status = $this->map_db($acc);
         } catch (\Exception $e) {
@@ -125,14 +122,16 @@ class InkiuAccountFactory implements ISingleton
         $acc->set_account_name($info);
         $acc->set_staff_name($info);
         $acc->set_password($info);
-        $acc->set_address($info);
+        $acc->set_email($info);
         $acc->set_id($info);
+        $acc->set_parent_id($info);
         return $acc;
     }
 
     /**
      * Update information of an Account object and then save changes to database
      * @param $info array of input
+     * @var $role_obj RbacRole
      * @return bool
      */
     public function update_account($info)
@@ -191,6 +190,18 @@ class InkiuAccountFactory implements ISingleton
         }
         //If has id => get information of all accounts
         return $this->model_account->read_tables();
+    }
+
+    public function load_accounts_info_html()
+    {
+        $info = $this->load_accounts_info();
+        return TreeBuilder::my_render_tree_html($info, array(
+            'depth' => 'depth',
+            'path' => 'path',
+            'id' => 'id',
+            'parent_id' => 'parent_id',
+            'title' => 'account_name'
+        ));
     }
 
     /**
@@ -284,17 +295,17 @@ class InkiuAccountFactory implements ISingleton
             throw new \Exception('Error while asking model to insert basic information of account');
         }
 
-        //Assign roles to this account
-        /** @var $row RbacRole */
-        $roles = $info['roles'];
-        foreach ($roles as $row)
-        {
-            $status = $this->model_rbac_assign_acc_role($row->get_id(), $acc_id);
-            if (!$status)
-            {
-                throw new \Exception('Error while assigning role to account');
-            }
-        }
+//        //Assign roles to this account
+//        /** @var $row RbacRole */
+//        $roles = $info['roles'];
+//        foreach ($roles as $row)
+//        {
+//            $status = $this->model_rbac_assign_acc_role($row->get_id(), $acc_id);
+//            if (!$status)
+//            {
+//                throw new \Exception('Error while assigning role to account');
+//            }
+//        }
         return true;
     }
 
@@ -441,6 +452,12 @@ class InkiuAccountFactory implements ISingleton
             return false;
         }
         return true;
+    }
+
+    function test()
+    {
+//        $r = $this->model_account->getDescendants('33');
+//        var_dump($r);
     }
 }
 

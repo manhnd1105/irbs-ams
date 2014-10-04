@@ -85,8 +85,11 @@ class REST
      */
     public function initialize($config)
     {
-        $this->rest_server = @$config['server'];
-
+//        $this->rest_server = @$config['server'];
+        if (isset($config['server']))
+        {
+            $this->rest_server = $config['server'];
+        }
         if (substr($this->rest_server, -1, 1) != '/') {
             $this->rest_server .= '/';
         }

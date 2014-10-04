@@ -12,6 +12,10 @@ class InkiuAccount extends Account
      */
     var $_address;
 
+    var $_email;
+
+    var $_parent_id;
+
     /**
      * Construct function
      */
@@ -32,7 +36,9 @@ class InkiuAccount extends Account
             'staff_name' => $this->_staff_name,
             'password' => $this->_password,
             'address' => $this->_address,
-            'roles' => $this->_roles
+            'roles' => $this->_roles,
+            'email' => $this->_email,
+            'parent_id' => $this->_parent_id
         );
         return $props;
     }
@@ -53,6 +59,16 @@ class InkiuAccount extends Account
         return $this->_address;
     }
 
+    public function set_email($info)
+    {
+        $this->_email = $this->init_set($info, 'email');
+    }
+
+    public function get_email()
+    {
+        return $this->_email;
+    }
+
     /**
      * Wrap this instance by an Role object
      * @param string $role_name Name of the Role that would be used to wrap this instance
@@ -61,5 +77,15 @@ class InkiuAccount extends Account
     public function wrap_role($role_name)
     {
         return new $role_name($this);
+    }
+
+    public function set_parent_id($info)
+    {
+        $this->_parent_id = $this->init_set($info, 'parent_id');
+    }
+
+    public function get_parent_id()
+    {
+        return $this->_parent_id;
     }
 }

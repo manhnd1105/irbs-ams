@@ -14,6 +14,7 @@
 //echo "<script src='" . base_url() . "application/modules/account/views/js/role_tree.js'></script>";
 
 
+
 echo '<div class="row">';
 
 echo '<div  class="col-sm-12">';
@@ -23,37 +24,32 @@ echo '<div class="panel panel-default">';
 echo '<div class="panel-heading">Account Management</div>';
 echo '<div class="table-responsive">';
 echo '<table class="table">';
-    echo '<tr>';
-        echo '<td> Id</td>';
-        echo '<td> Account Name </td>';
-        echo '<td> Staff Name </td>';
-        echo '<td> Password </td>';
-        echo '<td> Address </td>';
-        echo '<td> Action </td>';
+echo '<tr>';
+echo '<td> ID</td>';
+echo '<td> Account Name </td>';
+echo '<td> Staff Name </td>';
+echo '<td> Password </td>';
+echo '<td> Email </td>';
+echo '<td> Action </td>';
 
-        echo '</tr>';
+echo '</tr>';
 
 
-    foreach ($info as $row) {
-        $id = $row['id'];
+foreach ($info as $row) {
+    $id = $row['id'];
 
-        echo '<tr >';
-        echo '<td >'.$row['id'].'</td>';
-        echo '<td >'.$row['account_name'].'</td>';
-        echo '<td>'.$row['staff_name'].'</td>';
-        echo '<td>'.$row['password'].'</td>';
-        echo '<td>'.$row['address'].'</td>';
-        echo '<td>'.'<span class="label label-info">'.anchor('account/account_controller/view_update/' . $id, 'Edit').'</span>','  ',
-        '<span class="label label-info">'.anchor('account/account_controller/delete/' . $id, 'Remove').'</span>',' ',
-        '<span class="label label-info">'.anchor('account/account_controller/list_roles/' . $id, 'Assigned roles').'</span>'.'</td>';
+    echo '<tr class="success"">';
+    echo '<td >' . $id . '</td>';
+    echo '<td >' . $row['account_name'] . '</td>';
+    echo '<td>' . $row['staff_name'] . '</td>';
+    echo '<td>' . $row['password'] . '</td>';
+    echo '<td>' . $row['email'] . '</td>';
+    echo '<td>' . anchor('account/account_controller/view_update/' . $id, 'Edit'), '  ', anchor('account/account_controller/delete/' . $id, 'Remove'), ' ', anchor('account/account_controller/list_roles/' . $id, 'Assigned roles') . '</td>';
 
-        echo '</tr>';
-    }
+    echo '</tr>';
+}
 
-    echo '</table>';
-echo '</div>';
-echo '</div>';
-
+echo '</table>';
 echo '</div>';
 echo '</div>';
 

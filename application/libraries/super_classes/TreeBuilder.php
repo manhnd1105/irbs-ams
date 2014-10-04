@@ -65,31 +65,38 @@ class TreeBuilder
 //        return $buf;
 //    }
 
-    static function my_render_tree_html($tree)
+    static function my_render_tree_html($tree,
+                                        $custom_fields = array(
+                                            'depth' => 'depth',
+                                            'path' => 'path',
+                                            'id' => 'id',
+                                            'parent_id' => 'parent_id',
+                                            'title' => 'title'
+                                        )
+    )
     {
-
         $buf = '';
         $depth = -1;
         foreach ($tree as $node) {
-            if ($node['depth'] > $depth) {
+            if ($node[$custom_fields['depth']] > $depth) {
                 $buf .= "<ul><li>";
                 $buf .= "<a" .
-                    " href='" . $node['path'] . "'" .
-                    " entity_id='" . $node['id'] . "'" .
-                    " parent_entity_id='" . $node['parent_id'] . "'" .
+                    " href='" . $node[$custom_fields['path']] . "'" .
+                    " entity_id='" . $node[$custom_fields['id']] . "'" .
+                    " parent_entity_id='" . $node[$custom_fields['parent_id']] . "'" .
                     ">" .
-                    $node['title'] . "</a>";
+                    $node[$custom_fields['title']] . "</a>";
             } else {
-                $buf .= str_repeat("</li></ul>", $depth - $node['depth']);
+                $buf .= str_repeat("</li></ul>", $depth - $node[$custom_fields['depth']]);
                 $buf .= "</li><li>";
                 $buf .= "<a" .
-                    " href='" . $node['path'] . "'" .
-                    " entity_id='" . $node['id'] . "'" .
-                    " parent_entity_id='" . $node['parent_id'] . "'" .
+                    " href='" . $node[$custom_fields['path']] . "'" .
+                    " entity_id='" . $node[$custom_fields['id']] . "'" .
+                    " parent_entity_id='" . $node[$custom_fields['parent_id']] . "'" .
                     ">" .
-                    $node['title'] . "</a>";
+                    $node[$custom_fields['title']] . "</a>";
             }
-            $depth = $node['depth'];
+            $depth = $node[$custom_fields['depth']];
         }
         $buf .= str_repeat("</li></ul>", $depth + 1);
         //TODO fix bug there is one "</li></ul>" spare on end of string line

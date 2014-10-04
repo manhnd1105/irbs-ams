@@ -13,19 +13,6 @@ require_once __DIR__ . '/../CITest.php';
  */
 class ModelAccountTest extends  PHPUnit_Framework_TestCase
 {
-
-//    private $CI;
-//
-//    public static function setUpBeforeClass()
-//    {
-//        $CI =& get_instance();
-//        $CI->load->helper('email');
-//    }
-//    public function testEmailValidation()
-//    {
-//        $this->assertTrue(valid_email('test@test.com'));
-//        $this->assertFalse(valid_email('test#test.com'));
-//    }
     /**
      * @param array $where
      * @param string $required_fields
@@ -126,7 +113,6 @@ class ModelAccountTest extends  PHPUnit_Framework_TestCase
         $actual =1;
         // Assert this result
         $this->assertTrue($actual >= 0);
-
     }
 
     /**
@@ -206,93 +192,6 @@ class ModelAccountTest extends  PHPUnit_Framework_TestCase
         );
     }
 
-//    /**
-//     * @param int $input
-//     * @param int $role_id
-//     * @param $expected
-//     * @dataProvider providerTestAssignRole
-//    */
-//    public function testAssignRole($input,$role_id,$expected){
-//        //create an instance of model
-//        $model = new Model_account();
-//
-//        //Ask model to perform method needed to test
-//        $actual = $model->assign_role($input,$role_id);
-//
-//        // Assert this result
-//        $this->assertEquals($actual,$expected);
-//    }
-//
-//    /**
-//     * Data provider for testAssignRole
-//    */
-//    function providerTestAssignRole(){
-//        return array(
-//            '0'=>array(
-//                'account_id'=>8,
-//                'role_id'=> 1,
-//                'expected'=>true
-//            ),
-//            '1'=>array(
-//                'account_id'=>9,
-//                'role_id'=> 1,
-//                'expected'=>false
-//            )
-//        );
-//    }
-//
-//    /**
-//     * @param int $input
-//     * @param int $role_id
-//     * @param $expected
-//     * @dataProvider providerTestUnassignRole
-//     */
-//    public function testUnassignRole($input,$role_id,$expected){
-//        //create an instance of model
-//        $model = new Model_account();
-//
-//        //Ask model to perform method needed to test
-//        //$actual = $model->unassign_role($input,$role_id);
-//        $actual = true;
-//        // Assert this result
-//        $this->assertEquals($actual,$expected);
-//    }
-//
-//    /**
-//     * Data provider for testUnassignRole
-//     */
-//    function providerTestUnassignRole(){
-//        return array(
-//            '0'=>array(
-//                'account_id'=>8,
-//                'role_id'=> 1,
-//                'expected'=>true
-//            ),
-//            '1'=>array(
-//                'account_id'=>9,
-//                'role_id'=> -1,
-//                'expected'=>false
-//            )
-//        );
-//    }
-//
-//    /**
-//     * Test list_roles
-//     * @param $input
-//     * @dataProvider providerTestListRoles
-//    */
-//    public function testListRoles($input){
-//        // TO DO something here....
-//        $this->assertTrue(false);
-//    }
-//
-//    /**
-//     * Data provider for testListRoles
-//     */
-//    function  providerTestListRoles(){
-//        return array();
-//    }
-
     /**
      * @param $input
      * @param string $password
@@ -361,4 +260,119 @@ class ModelAccountTest extends  PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @param $id
+     * @param $expected
+     * @dataProvider providerTestGetDescendants
+     */
+    public function testGetDescendants($id, $expected)
+    {
+
+    }
+
+    /**
+     * @return array
+     */
+    function providerTestGetDescendants()
+    {
+        return array(
+            '0' => array(
+                'id' => '2',
+                'expected' => array(
+                    '0' => array(
+                        'id' => '8',
+                        'account_name' => 'manhnd',
+                        'staff_name' => 'Nguyen Duc Manh',
+                        'password' => '123456',
+                        'address' => '2321',
+                        'left' => '8',
+                        'right' => '9',
+                        'parent_id' => '2'
+                    ),
+                    '1' => array(
+                        'id' => '8',
+                        'account_name' => 'manhnd',
+                        'staff_name' => 'Nguyen Duc Manh',
+                        'password' => '123456',
+                        'address' => '2321',
+                        'left' => '8',
+                        'right' => '9',
+                        'parent_id' => '2'
+                    ),
+                    '2' => array(
+                        'id' => '8',
+                        'account_name' => 'manhnd',
+                        'staff_name' => 'Nguyen Duc Manh',
+                        'password' => '123456',
+                        'address' => '2321',
+                        'left' => '8',
+                        'right' => '9',
+                        'parent_id' => '2'
+                    )
+                )
+            ),
+            '1' => array(
+                'id' => '2',
+                'expected' => array(
+                    '0' => array(
+                        'id' => '8',
+                        'account_name' => 'manhnd',
+                        'staff_name' => 'Nguyen Duc Manh',
+                        'password' => '123456',
+                        'address' => '2321',
+                        'left' => '8',
+                        'right' => '9',
+                        'parent_id' => '2'
+                    ),
+                    '1' => array(
+                        'id' => '8',
+                        'account_name' => 'manhnd',
+                        'staff_name' => 'Nguyen Duc Manh',
+                        'password' => '123456',
+                        'address' => '2321',
+                        'left' => '8',
+                        'right' => '9',
+                        'parent_id' => '2'
+                    ),
+                    '2' => array(
+                        'id' => '8',
+                        'account_name' => 'manhnd',
+                        'staff_name' => 'Nguyen Duc Manh',
+                        'password' => '123456',
+                        'address' => '2321',
+                        'left' => '8',
+                        'right' => '9',
+                        'parent_id' => '2'
+                    )
+                )
+            )
+        );
+    }
+
+    /**
+     * @param $id
+     * @param $expected
+     * @dataProvider providerTestGetDepth
+     */
+    public function testGetDepth($id, $expected)
+    {
+
+    }
+
+    /**
+     * @return array
+     */
+    function providerTestGetDepth()
+    {
+        return array(
+            'test case 0' => array(
+                'id' => '3',
+                'expected' => '1'
+            ),
+            'test case 1' => array(
+                'id' => '2',
+                'expected' => '2'
+            )
+        );
+    }
 }
