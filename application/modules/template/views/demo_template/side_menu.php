@@ -25,7 +25,7 @@
 
 
 echo     '<div class="row">';
-echo ' <div class="col-sm-3 col-md-2 sidebar" style="margin-top: 70px">';
+echo ' <div class="col-sm-3 col-md-2 sidebar" >';
 
 echo '   <ul class="nav nav-pills nav-stacked">';
 //echo '  <li class="active"><a href="#">Overview</a></li>';
