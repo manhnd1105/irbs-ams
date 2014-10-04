@@ -104,6 +104,17 @@ class Account_controller extends Frontend_Controller
         //Render a page and pass needed data to it
         $data['parent_id'] = $post['entity_id'];
         $data['form_action'] = 'account/account_controller/create';
+        $this->render('account', '/account_create', $data);
+    }
+
+    public function view_create_ajax()
+    {
+        //Get information from POST
+        $post = $this->input->post();
+
+        //Render a page and pass needed data to it
+        $data['parent_id'] = $post['entity_id'];
+        $data['form_action'] = 'account/account_controller/create';
         $this->load->view('account_create', $data);
     }
 

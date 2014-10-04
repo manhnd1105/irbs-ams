@@ -24,8 +24,9 @@ echo '<div id="jstree">';
 print $acc_tree;
 echo '</div>';
 
-echo form_button('btn_create', 'Create account', "id='btn_create'");
-echo form_button('btn_update', 'Update account', "id='btn_update'");
-echo form_button('btn_delete', 'Delete account', "id='btn_delete'");
-echo form_button('btn_list_roles', 'List assigned roles', "id='btn_list_roles'");
-echo form_button('btn_assign_roles', 'Assign roles', "id='btn_assign_roles'");
+
+echo form_button('btn_create', 'Create account', "id='btn_create', class='btn btn-success'");
+echo form_button('btn_update', 'Update account', "id='btn_update', class='btn btn-success'");
+echo form_button('btn_delete', 'Delete account', "id='btn_delete', class='btn btn-success'");
+echo form_button('btn_list_roles', 'List assigned roles', "id='btn_list_roles', class='btn btn-success'");
+echo form_button('btn_assign_roles', 'Assign roles', "id='btn_assign_roles', class='btn btn-success'");

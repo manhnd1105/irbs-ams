@@ -116,7 +116,7 @@ create_view.prototype.create_acc = function () {
     var that = this;
     this.backbone.create({
         'tree': $('#jstree').jstree(true),
-        'url': base_url + 'index.php/account/account_controller/view_create',
+        'url': base_url + 'index.php/account/account_controller/view_create_ajax',
         'success': function (data) {
             that.display_success(data);
         },
