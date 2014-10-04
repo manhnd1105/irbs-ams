@@ -20,10 +20,11 @@ echo '</div>';
 echo '<div class="navbar-collapse collapse">';
 echo '<ul class="nav navbar-nav navbar-right">';
 
-if (!isset($acc_name)) {
-    echo '<li>'.anchor('account/account_controller/view_create', 'Sign up').'</li>';
-    echo '<li>'.anchor('authentication/authentication_controller/view_login', 'Log in').'</li>';
-} else {
+$acc_name = $this->session->userdata('acc_name');
+
+//If $acc_name exists => show welcome and log out link
+if ($acc_name == true)
+{
     echo '<li><a href="#">
 <span class="badge pull-right">42</span>
 Message
@@ -31,10 +32,20 @@ Message
     echo '<li><a href="#">Settings</a></li>';
     echo '<li><a href="#">Profile</a></li>';
     echo '<li>';
-    echo 'Hello,' . $acc_name; echo anchor('authentication/authentication_controller/logout', 'Log out');
+    echo '<a href="#">Hello, ' . $acc_name . '</a>';
+    echo '</li>';
+    echo '<li>';
+    echo anchor('authentication/authentication_controller/logout', 'Log out');
     echo '</li>';
 }
-echo   '';
+//If $acc_name not exist => render login links
+else
+{
+    echo '<li>' . anchor('account/account_controller/view_create', 'Sign up') . '</li>';
+    echo '<li>' . anchor('authentication/authentication_controller/view_login', 'Log in') . '</li>';
+
+}
+echo '';
 
 echo '</ul>';
 echo '</ul>';

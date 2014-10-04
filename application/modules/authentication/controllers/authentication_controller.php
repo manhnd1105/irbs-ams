@@ -53,6 +53,7 @@ class Authentication_controller extends Frontend_Controller
      */
     private function return_to_main($main_view_uri = 'authentication/authentication_controller/view_main')
     {
+        $main_view_uri = 'account/account_controller';
         redirect($main_view_uri);
     }
 
