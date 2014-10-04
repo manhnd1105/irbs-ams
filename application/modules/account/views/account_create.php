@@ -12,6 +12,7 @@ echo "<script src='" . base_url() . "dist/libs/jquery.js'></script>";
 echo "<script src='" . base_url() . "dist/jstree.min.js'></script>";
 echo "<script src='" . base_url() . "application/modules/account/views/js/role_tree.js'></script>";
 
+
 echo '<div class="row">';
 echo '<div  class="col-sm-4">';
 echo '</div >';
@@ -19,7 +20,7 @@ echo '</div >';
 echo '<div  class="col-sm-4">';
 echo form_open('account/account_controller/create',"class='form-horizontal'");
 
-echo form_fieldset('Detail information');
+echo form_fieldset('Sign up');
 echo '<div class="form-group-sm">';
 echo form_label('Username');
 echo form_input('username','',"class='form-control'","id=''");
@@ -68,15 +69,15 @@ echo form_fieldset_close();
 //print $role_tree;
 //echo "</div>";
 
-echo form_fieldset_close();
-echo form_button('btn_create', 'Sing up',"class='btn btn-success'");
+echo '<div>&nbsp;</div>';
+echo form_button('btn_create', 'Sign up',"class='btn btn-success'");
 echo  '<br/>';
 echo '<img src="..." alt="..." class="img-circle">';
 echo anchor('','Use existing Google account');
 echo  '<br/>';
 echo '<img src="..." alt="..." class="img-circle">';
 echo anchor('','Use existing Facebook account');
-
+echo form_fieldset_close();
 echo '</div >';
 echo '<div  class="col-sm-4">';
 echo '</div >';

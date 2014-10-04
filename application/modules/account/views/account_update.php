@@ -13,6 +13,13 @@ echo "<script src='" . base_url() . "dist/libs/jquery.js'></script>";
 echo "<script src='" . base_url() . "dist/jstree.min.js'></script>";
 echo "<script src='" . base_url() . "application/modules/account/views/js/role_tree.js'></script>";
 
+
+
+echo '<div class="row">';
+echo '<div  class="col-sm-2">';
+echo '</div >';
+
+echo '<div  class="col-sm-6">';
 echo form_open('account/account_controller/update');
 echo form_hidden('id', $info['id']);
 echo form_fieldset('Information');
@@ -44,5 +51,7 @@ echo form_fieldset_close();
 echo form_button('btn_update', 'Update',"class='btn btn-success'");echo '      ';
 echo form_button('btn_cancel', 'Cancel',"class='btn btn-success'");
 
+echo '</div >';
+echo '</div>';
 
 

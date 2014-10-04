@@ -12,10 +12,12 @@
 //echo "<script src='" . base_url() . "dist/libs/jquery.js'></script>";
 //echo "<script src='" . base_url() . "dist/jstree.min.js'></script>";
 //echo "<script src='" . base_url() . "application/modules/account/views/js/role_tree.js'></script>";
-echo '<div>&nbsp;</div>';
-echo '<div>&nbsp;</div>';
-echo '<div>&nbsp;</div>';
-echo anchor('account/account_controller/view_create', 'Create new account');
+
+
+echo '<div class="row">';
+
+echo '<div  class="col-sm-12">';
+
 
 echo '<div class="panel panel-default">';
 echo '<div class="panel-heading">Account Management</div>';
@@ -35,18 +37,23 @@ echo '<table class="table">';
     foreach ($info as $row) {
         $id = $row['id'];
 
-        echo '<tr class="success"">';
+        echo '<tr >';
         echo '<td >'.$row['id'].'</td>';
         echo '<td >'.$row['account_name'].'</td>';
         echo '<td>'.$row['staff_name'].'</td>';
         echo '<td>'.$row['password'].'</td>';
         echo '<td>'.$row['address'].'</td>';
-        echo '<td>'.anchor('account/account_controller/view_update/' . $id, 'Edit'),'  ',anchor('account/account_controller/delete/' . $id, 'Remove'),' ',anchor('account/account_controller/list_roles/' . $id, 'Assigned roles').'</td>';
+        echo '<td>'.'<span class="label label-info">'.anchor('account/account_controller/view_update/' . $id, 'Edit').'</span>','  ',
+        '<span class="label label-info">'.anchor('account/account_controller/delete/' . $id, 'Remove').'</span>',' ',
+        '<span class="label label-info">'.anchor('account/account_controller/list_roles/' . $id, 'Assigned roles').'</span>'.'</td>';
 
         echo '</tr>';
     }
 
     echo '</table>';
+echo '</div>';
+echo '</div>';
+
 echo '</div>';
 echo '</div>';
 

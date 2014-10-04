@@ -15,6 +15,7 @@
 class CITestCase extends PHPUnit_Extensions_Database_TestCase
 {
 	/**
+     *
 	 * Reference to CodeIgniter
 	 * 
 	 * @var resource

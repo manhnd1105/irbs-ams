@@ -6,6 +6,9 @@
 /** @var $module_name string */
 /** @var $controller_name string */
 /** @var $action string */
+
+
+
 echo '<div class="row">';
 echo '<div  class="col-sm-4">';
 echo '</div >';
@@ -16,7 +19,7 @@ echo form_open($module_name . '/' . $controller_name . '/' . $action);
 echo form_fieldset('Login ');
 echo '<div class="form-group">';
 echo form_label('Username/Email');
-echo form_input('acc_name', 'manhnd',"class='form-control'","id='exampleInputEmail1'");
+echo form_input('acc_name', 'manhnd',"class='form-control'","id=''");
 echo form_error('acc_name');
 
 echo '</div>';

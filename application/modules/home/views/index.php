@@ -5,6 +5,5 @@
 //foreach ($actions as $action) {
 //    echo '<p><a href="#">' . $action . '</a></p>';
 //}
-echo 'Welcome, this is home page';
+echo '<h2>Welcome to admin page </h2>';
 echo '</br>';
-echo 'Main content here';

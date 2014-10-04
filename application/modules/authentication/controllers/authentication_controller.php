@@ -74,7 +74,7 @@ class Authentication_controller extends Frontend_Controller
     public function view_main()
     {
         $data['acc_name'] = $this->session->userdata('acc_name');
-        $this->render('authentication', '/main', $data);
+        $this->render('home', 'index', $data);
     }
 
     /**
