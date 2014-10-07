@@ -45,3 +45,10 @@ echo '</div>';
 
 echo form_fieldset_close();
 
+if (isset($last_url))
+{
+    echo "<input type='hidden' name='last_url' value='" . urldecode(urldecode(urldecode($last_url))) . "'/>";
+}
+
+
+
