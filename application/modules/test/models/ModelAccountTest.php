@@ -27,7 +27,7 @@ class ModelAccountTest extends  PHPUnit_Framework_TestCase
         $model = new Model_account();
 
         //Ask model to perform method that needed to test
-        $actual = $model->read();
+        $actual = $model->read('account');
 
         //var_dump($actual);
         //Assert the result
