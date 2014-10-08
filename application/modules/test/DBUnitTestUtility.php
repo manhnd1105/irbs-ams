@@ -107,6 +107,11 @@ class DBUnitTestUtility{
             'rbac_userroles'=> array(
                 'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.rbac_userroles;',
                 'CREATE TABLE '.self::$nameDBtesting.'.rbac_userroles SELECT * FROM '.self::$nameDBSource.'.rbac_userroles'
+            ),
+            'price_list'=> array(
+                'DROP TABLE IF EXISTS '.self::$nameDBtesting.'.price_list;',
+                'CREATE TABLE '.self::$nameDBtesting.'.price_list SELECT * FROM '.self::$nameDBSource.'.price_list',
+                'ALTER TABLE file MODIFY id INT AUTO_INCREMENT, ADD PRIMARY KEY (id)'
             )
         );
 
