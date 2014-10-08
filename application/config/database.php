@@ -66,7 +66,7 @@ $db['remote']['stricton'] = FALSE;
 
 $db['default']['hostname'] = 'mysql:host=127.0.0.1';
 $db['default']['username'] = 'root';
-$db['default']['password'] = '123456';
+$db['default']['password'] = '';
 $db['default']['database'] = 'irbs';
 $db['default']['dbdriver'] = 'pdo';
 $db['default']['dbprefix'] = '';
