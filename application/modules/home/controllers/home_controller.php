@@ -24,9 +24,16 @@ class Home_controller extends Backend_Controller
      */
     public function index()
     {
+
+        if($this->session->userdata('is_logged_in')){
+            $this->template_controller->demo_template('home', 'index');
+        }else{
+         redirect('authentication/authentication_controller/view_login');
+        }
+
         //Call the layout (as method of template controller) that you want to display
         //$data['actions'] = $this->init_actions();
-        $this->template_controller->demo_template('home', 'index');
+        //$this->template_controller->demo_template('home', 'index');
     }
 
     /**

@@ -31,8 +31,8 @@ Message
 </a></li>';
     echo '<li><a href="#">Settings</a></li>';
     echo '<li><a href="#">Profile</a></li>';
-    echo '<li>';
-    echo '<a href="#">Hello, ' . $acc_name . '</a>';
+    echo '<li>'; echo '<a href="#">Hello, ' . $acc_name . '</a>';
+
     echo '</li>';
     echo '<li>';
     echo anchor('authentication/authentication_controller/logout', 'Log out');

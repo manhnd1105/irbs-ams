@@ -29,8 +29,9 @@ class MY_Controller extends MX_Controller
     {
         parent::__construct();
         $this->restrict_factory = \super_classes\RbacRestrictAccessFactory::get_instance();
-        $this->CI = & get_instance();
+        $this->CI = &get_instance();
         $this->restrict_access();
+        $this->login_access();
     }
 
     private function restrict_access()
@@ -45,31 +46,41 @@ class MY_Controller extends MX_Controller
         $acc_id = $this->session->userdata('acc_id');
 
         //If has no id => set id to 0 (unauthorized role id)
-        if (!$acc_id)
-        {
+        if (!$acc_id) {
             $acc_id = 0;
         }
 
         $perm_path = '/irbs' . '/' . $module . '/' . $controller . '/' . $method;
 
-        try
-        {
+        try {
             $status = $this->restrict_factory->check_access($acc_id, $perm_path);
-            if (!$status)
-            {
+            if (!$status) {
                 echo 'access denied';
-                if ($this->config->item('restrict_unauthorized'))
-                {
+                if ($this->config->item('restrict_unauthorized')) {
                     die;
                 }
             }
-        } catch (RbacException $e)
-        {
+        } catch (RbacException $e) {
             echo 'access denied (permission not found), ' . $e->getMessage();
-            if ($this->config->item('restrict_unauthorized'))
-            {
+            if ($this->config->item('restrict_unauthorized')) {
                 die;
             }
         }
     }
+
+    private function login_access()
+    {
+        $module = $this->CI->router->fetch_module();
+        $controller = $this->CI->router->fetch_class();
+        $method = $this->CI->router->fetch_method();
+        $acc_name = $this->session->userdata('acc_name');
+
+        $url = $module . '/' . $controller . '/' . $method;
+        $redirect_url = 'authentication/authentication_controller/view_login';
+        if ($acc_name == false && $url !== $redirect_url)
+        {
+            redirect($redirect_url);
+        }
+    }
+
 }

@@ -2,6 +2,10 @@
     base_url = '<?=base_url()?>';
 </script>
 
+<link rel="stylesheet" href="<?php echo base_url() . "assets/css/bootstrap.css"; ?>">
+<script type="text/javascript" src="<?php echo base_url() . "assets/js/jquery.js"; ?>"></script>
+<script type="text/javascript" src="<?php echo base_url() . "assets/js/bootstrap.js"; ?>"></script>
+
 <?php
 /** @var $module_name string */
 /** @var $controller_name string */

@@ -118,6 +118,6 @@ class Authentication_controller extends Frontend_Controller
     public function logout()
     {
         $this->session->sess_destroy();
-        $this->return_to_main();
+        redirect('authentication/authentication_controller/view_login');
     }
 } 
