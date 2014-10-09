@@ -22,8 +22,8 @@ class DBUnitTestUtility{
     function __construct()
     {
         $this->CI = & get_instance();
-        self::$nameDBtesting = $this->CI->db->database.'_testing';
-        self::$nameDBSource = $this->CI->db->database;
+        self::$nameDBtesting = $this->CI->db->database;
+        self::$nameDBSource = 'irbs';
     }
 
     /**

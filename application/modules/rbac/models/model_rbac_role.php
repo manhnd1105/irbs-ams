@@ -17,7 +17,12 @@ class Model_rbac_role
      */
     function __construct()
     {
-        $this->rbac = new \PhpRbac\Rbac();
+        if (defined('PHPUNIT_TEST')) {
+            $this->rbac = new \PhpRbac\Rbac('unit_test');
+        }else{
+            $this->rbac = new \PhpRbac\Rbac();
+        }
+        //$this->rbac = new \PhpRbac\Rbac();
     }
 
     /**

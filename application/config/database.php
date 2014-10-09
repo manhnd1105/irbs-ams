@@ -44,41 +44,64 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
+if (! defined('PHPUNIT_TEST')){
+    $active_group = 'default';
+    $active_record = TRUE;
 
-$active_group = 'remote';
-$active_record = TRUE;
+    $db['remote']['hostname'] = 'mysql:host=123.30.238.216:3306';
+    $db['remote']['username'] = 'irbs';
+    $db['remote']['password'] = '123456';
+    $db['remote']['database'] = 'irbs';
+    $db['remote']['dbdriver'] = 'pdo';
+    $db['remote']['dbprefix'] = '';
+    $db['remote']['pconnect'] = TRUE;
+    $db['remote']['db_debug'] = TRUE;
+    $db['remote']['cache_on'] = FALSE;
+    $db['remote']['cachedir'] = '';
+    $db['remote']['char_set'] = 'utf8';
+    $db['remote']['dbcollat'] = 'utf8_general_ci';
+    $db['remote']['swap_pre'] = '';
+    $db['remote']['autoinit'] = TRUE;
+    $db['remote']['stricton'] = FALSE;
 
-$db['remote']['hostname'] = 'mysql:host=123.30.238.216:3306';
-$db['remote']['username'] = 'irbs';
-$db['remote']['password'] = '123456';
-$db['remote']['database'] = 'irbs';
-$db['remote']['dbdriver'] = 'pdo';
-$db['remote']['dbprefix'] = '';
-$db['remote']['pconnect'] = TRUE;
-$db['remote']['db_debug'] = TRUE;
-$db['remote']['cache_on'] = FALSE;
-$db['remote']['cachedir'] = '';
-$db['remote']['char_set'] = 'utf8';
-$db['remote']['dbcollat'] = 'utf8_general_ci';
-$db['remote']['swap_pre'] = '';
-$db['remote']['autoinit'] = TRUE;
-$db['remote']['stricton'] = FALSE;
+    $db['default']['hostname'] = 'mysql:host=127.0.0.1';
+    $db['default']['username'] = 'root';
+    $db['default']['password'] = '';
+    $db['default']['database'] = 'irbs';
+    $db['default']['dbdriver'] = 'pdo';
+    $db['default']['dbprefix'] = '';
+    $db['default']['pconnect'] = TRUE;
+    $db['default']['db_debug'] = TRUE;
+    $db['default']['cache_on'] = FALSE;
+    $db['default']['cachedir'] = '';
+    $db['default']['char_set'] = 'utf8';
+    $db['default']['dbcollat'] = 'utf8_general_ci';
+    $db['default']['swap_pre'] = '';
+    $db['default']['autoinit'] = TRUE;
+    $db['default']['stricton'] = FALSE;
 
-$db['default']['hostname'] = 'mysql:host=127.0.0.1';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'irbs';
-$db['default']['dbdriver'] = 'pdo';
-$db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
+}
+else{
+    $active_group = 'test';
+    $active_record = TRUE;
+
+    $db['test']['hostname'] = '127.0.0.1';
+    $db['test']['username'] = 'root';
+    $db['test']['password'] = '';
+    $db['test']['database'] = 'irbs_testing';
+    $db['test']['dbdriver'] = 'mysql';
+    $db['test']['dbprefix'] = '';
+    $db['test']['pconnect'] = TRUE;
+    $db['test']['db_debug'] = TRUE;
+    $db['test']['cache_on'] = FALSE;
+    $db['test']['cachedir'] = '';
+    $db['test']['char_set'] = 'utf8';
+    $db['test']['dbcollat'] = 'utf8_general_ci';
+    $db['test']['swap_pre'] = '';
+    $db['test']['autoinit'] = TRUE;
+    $db['test']['stricton'] = FALSE;
+}
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

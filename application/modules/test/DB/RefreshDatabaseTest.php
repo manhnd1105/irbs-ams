@@ -24,10 +24,15 @@ class RefreshDatabaseTest extends PHPUnit_Framework_TestCase{
 
     public function testConnectToMySQLIrbsTesting()
     {
-        $db_testing_name = $this->db->database.'_testing';
+        $db_testing_name = $this->db->database;
         $host = $this->db->hostname;
         $username = $this->db->username;
         $password = $this->db->password;
+
+        print $host;
+        print $username;
+        print $password;
+
         $conn = new mysqli($host,$username,$password,$db_testing_name);
         $this->assertTrue($conn != null);
     }

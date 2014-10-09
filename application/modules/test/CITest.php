@@ -59,6 +59,7 @@ class CITestCase extends PHPUnit_Extensions_Database_TestCase
         if ($this->conn === null) {
             if (self::$pdo == null) {
             	$dsn = $this->CI->db->dbdriver.':dbname='.$this->CI->db->database.';host='.$this->CI->db->hostname;
+                print $dsn;
                 self::$pdo = new PDO($dsn,$this->CI->db->username, $this->CI->db->password);
             }
             $this->conn = $this->createDefaultDBConnection(self::$pdo, $this->CI->db->database);

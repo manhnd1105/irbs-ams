@@ -9,10 +9,7 @@ class Model_account
      */
     private $db;
 
-    /**
-     * @var CI_DB_active_record
-     */
-    private $db_test;
+
 
     /**
      * @var CI_Controller
@@ -25,17 +22,7 @@ class Model_account
     function __construct()
     {
         $this->CI = & get_instance();
-        if (defined('PHPUNIT_TEST')){
-            $db_testing_name = $this->CI->db->database.'_testing';
-            $host = $this->CI->db->hostname;
-            $username = $this->CI->db->username;
-            $password = $this->CI->db->password;
-            $db_driver = $this->CI->db->dbdriver;
-            $dsn = $db_driver.'://'.$username.':'.$password.'@'.$host.'/'.$db_testing_name;
-            $this->db_test = $this->CI->load->database($dsn,true);
-        } else {
-            $this->db = $this->CI->db;
-        }
+        $this->db = $this->CI->db;
     }
 
     /**
@@ -55,39 +42,20 @@ class Model_account
      */
     public function read($table, $where = NULL, $required_fields = '*', $return_type = 'all')
     {
-        $db = null;
-        if (defined('PHPUNIT_TEST')) {
-            if ($where !== NULL) {
-                $this->db_test->where($where);
-            }
-            $this->db_test->select($required_fields);
-            $this->db_test->from($table);
-            $result = array();
-            switch ($return_type) {
-                case 'all':
-                    $result = $this->db_test->get()->result_array();
-                    break;
-                case 'one':
-                    $result = $this->db_test->get()->row_array();
-            }
-            return $result;
+        if ($where !== NULL) {
+            $this->db->where($where);
         }
-        else{
-            if ($where !== NULL) {
-                $this->db->where($where);
-            }
-            $this->db->select($required_fields);
-            $this->db->from('account');
-            $result = array();
-            switch ($return_type) {
-                case 'all':
-                    $result = $this->db->get()->result_array();
-                    break;
-                case 'one':
-                    $result = $this->db->get()->row_array();
-            }
-            return $result;
+        $this->db->select($required_fields);
+        $this->db->from($table);
+        $result = array();
+        switch ($return_type) {
+            case 'all':
+                $result = $this->db->get()->result_array();
+                break;
+            case 'one':
+                $result = $this->db->get()->row_array();
         }
+        return $result;
     }
 
     /**
@@ -106,41 +74,21 @@ class Model_account
      */
     public function read_tables($where = NULL, $required_fields = '*', $return_type = 'all')
     {
-        if (defined('PHPUNIT_TEST')) {
-            if ($where !== NULL) {
-                $this->db_test->where($where);
-            }
-            $this->db_test->select($required_fields);
-            $this->db_test->from('account');
-            $this->db_test->join('inkiu_account', 'account.id = inkiu_account.id');
-            $result = array();
-            switch ($return_type) {
-                case 'all':
-                    $result = $this->db_test->get()->result_array();
-                    break;
-                case 'one':
-                    $result = $this->db_test->get()->row_array();
-            }
-            return $result;
+        if ($where !== NULL) {
+            $this->db->where($where);
         }
-        else{
-            if ($where !== NULL) {
-                $this->db->where($where);
-            }
-            $this->db->select($required_fields);
-            $this->db->from('account');
-            $this->db->join('inkiu_account', 'account.id = inkiu_account.id');
-            $result = array();
-            switch ($return_type) {
-                case 'all':
-                    $result = $this->db->get()->result_array();
-                    break;
-                case 'one':
-                    $result = $this->db->get()->row_array();
-            }
-            return $result;
+        $this->db->select($required_fields);
+        $this->db->from('account');
+        $this->db->join('inkiu_account', 'account.id = inkiu_account.id');
+        $result = array();
+        switch ($return_type) {
+            case 'all':
+                $result = $this->db->get()->result_array();
+                break;
+            case 'one':
+                $result = $this->db->get()->row_array();
         }
-
+        return $result;
     }
 
 //    /**
@@ -150,39 +98,21 @@ class Model_account
 //     */
 //    public function insert($info)
 //    {
-//        if (defined('PHPUNIT_TEST')) {
-//            $this->db_test->trans_start();
-//            //Insert into account table
-//            $acc_info = new Account_table($info);
-//            $this->db_test->insert('account', $acc_info);
+//        $this->db->trans_start();
+//        //Insert into account table
+//        $acc_info = new Account_table($info);
+//        $this->db->insert('account', $acc_info);
 //
-//            //Get inserted id and then insert into inkiu account table
-//            $inserted_id = $this->db_test->insert_id();
-//            $info['id'] = $inserted_id;
-//            $inkiu_acc_info = new Inkiu_account_table($info);
-//            //$inkiu_acc_info->set_id($inserted_id);
-//            $this->db_test->insert('inkiu_account', $inkiu_acc_info);
-//            $this->db_test->trans_complete();
-//            return $inserted_id;
-//        }
-//        else
-//        {
-//            $this->db->trans_start();
-//            //Insert into account table
-//            $acc_info = new Account_table($info);
-//            $this->db->insert('account', $acc_info);
+//        //Get inserted id and then insert into inkiu account table
+//        $inserted_id = $this->db->insert_id();
+//        $inkiu_acc_info = new Inkiu_account_table($info);
+//        $inkiu_acc_info->setId($inserted_id);
 //
-//            //Get inserted id and then insert into inkiu account table
-//            $inserted_id = $this->db->insert_id();
-//            $inkiu_acc_info = new Inkiu_account_table($info);
-//            $inkiu_acc_info->setId($inserted_id);
+//        //Calculate the left, right, path, depth
 //
-//            //Calculate the left, right, path, depth
-//
-//            $this->db->insert('inkiu_account', $inkiu_acc_info);
-//            $this->db->trans_complete();
-//            return $inserted_id;
-//        }
+//        $this->db->insert('inkiu_account', $inkiu_acc_info);
+//        $this->db->trans_complete();
+//        return $inserted_id;
 //    }
 
     /**
@@ -192,9 +122,6 @@ class Model_account
      */
     public function update($info)
     {
-        if (defined('PHPUNIT_TEST')) {
-            $this->db = $this->db_test;
-        }
         try
         {
             $account_info = new Account_table($info);
@@ -218,36 +145,17 @@ class Model_account
 //     */
 //    public function remove($account_id)
 //    {
-//        if (defined('PHPUNIT_TEST')) {
-//            try
-//            {
-//                $this->db_test->trans_start();
-//                $this->db_test->delete('rbac_userroles', array('UserID' => $account_id));
-//                $this->db_test->delete('inkiu_account', array('id' => $account_id));
-//                $this->db_test->delete('account', array('id' => $account_id));
-//                $this->db_test->trans_complete();
-//                return true;
-//            } catch (\Exception $e)
-//            {
-//                \super_classes\IrbsException::write_log('error', $e);
-//                return false;
-//            }
-//        }
-//        else
+//        try
 //        {
-//            try
-//            {
-//                $this->db->trans_start();
-//                $this->db->delete('rbac_userroles', array('UserID' => $account_id));
-//                $this->db->delete('inkiu_account', array('id' => $account_id));
-//                $this->db->delete('account', array('id' => $account_id));
-//                $this->db->trans_complete();
-//                return true;
-//            }catch (\Exception $e){
-//                \super_classes\IrbsException::write_log('error', $e);
-//                return false;
-//            }
-//
+//            $this->db->trans_start();
+//            $this->db->delete('rbac_userroles', array('UserID' => $account_id));
+//            $this->db->delete('inkiu_account', array('id' => $account_id));
+//            $this->db->delete('account', array('id' => $account_id));
+//            $this->db->trans_complete();
+//            return true;
+//        }catch (\Exception $e){
+//            \super_classes\IrbsException::write_log('error', $e);
+//            return false;
 //        }
 //
 //    }
@@ -260,36 +168,19 @@ class Model_account
      */
     public function validate_account($account_name, $password)
     {
-        if (defined('PHPUNIT_TEST')) {
-            // Build a query to retrieve the user's details
-            // based on the received username and password
-            $this->db_test->from('account');
-            $this->db_test->where('account_name', $account_name);
-            $this->db_test->where('password', $password);
-            $login = $this->db_test->get()->result_array();
+        // Build a query to retrieve the user's details
+        // based on the received username and password
+        $this->db->from('account');
+        $this->db->where('account_name', $account_name);
+        $this->db->where('password', $password);
+        $login = $this->db->get()->result_array();
 
-            // The results of the query are stored in $login.
-            // If a value exists, then the user account exists and is validated
-            if (is_array($login) && count($login) == 1) {
-                return true;
-            }
-            return false;
+        // The results of the query are stored in $login.
+        // If a value exists, then the user account exists and is validated
+        if (is_array($login) && count($login) == 1) {
+            return true;
         }
-        else{
-            // Build a query to retrieve the user's details
-            // based on the received username and password
-            $this->db->from('account');
-            $this->db->where('account_name', $account_name);
-            $this->db->where('password', $password);
-            $login = $this->db->get()->result_array();
-
-            // The results of the query are stored in $login.
-            // If a value exists, then the user account exists and is validated
-            if (is_array($login) && count($login) == 1) {
-                return true;
-            }
-            return false;
-        }
+        return false;
 
     }
 
@@ -300,16 +191,9 @@ class Model_account
      */
     public function get_id_by_name($account_name)
     {
-        if (defined('PHPUNIT_TEST')) {
-            $this->db_test->from('account');
-            $this->db_test->where('account_name', $account_name);
-            return $this->db_test->get()->row_array()['id'];
-        }
-        else{
-            $this->db->from('account');
-            $this->db->where('account_name', $account_name);
-            return $this->db->get()->row_array()['id'];
-        }
+        $this->db->from('account');
+        $this->db->where('account_name', $account_name);
+        return $this->db->get()->row_array()['id'];
     }
 
 
@@ -410,6 +294,7 @@ class Model_account
      */
     public function insert($info)
     {
+
         $this->db->trans_start();
         //Insert into account table
         $acc_info = new Account_table($info);
@@ -479,6 +364,7 @@ class Model_account
      */
     public function remove_sub($id)
     {
+
         $sql = "SELECT lft AS 'Left',rgt AS 'Right' ,rgt-lft+ 1 AS 'Width' FROM inkiu_account WHERE id = {$id};
         ";
         $info = $this->db->query($sql)->result_array()[0];
@@ -516,14 +402,25 @@ class Model_account
         $this->db->query($sql);
     }
 
+    /**
+     * Remove
+     * @param $id
+     * @return bool
+     */
     public function remove($id)
     {
-        $this->db->trans_start();
-        $this->db->delete('rbac_userroles', array('UserID' => $id));
-        $this->remove_shift($id);
-        $this->db->delete('account', array('id' => $id));
-        $this->db->trans_complete();
-        return true;
+        try{
+            $this->db->trans_start();
+            $this->db->delete('rbac_userroles', array('UserID' => $id));
+            $this->remove_shift($id);
+            $this->db->delete('account', array('id' => $id));
+            $this->db->trans_complete();
+            return true;
+        }catch (Exception $e){
+            print $e ->getMessage();
+            return false;
+        }
+
     }
 }
 

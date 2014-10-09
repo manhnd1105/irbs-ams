@@ -108,6 +108,22 @@ class ModelRbacPermTest extends PHPUnit_Framework_TestCase {
                     'parent_id' =>'3'
                 ),
                 'expected' => true
+            ),
+            '1'=> array(
+                'input' => array(
+                    'title' => 'child lv 3',
+                    'desc' => 'Test insert Permissions',
+                    'parent_id' =>'-1'
+                ),
+                'expected' => true
+            ),
+            '2'=> array(
+                'input' => array(
+                    'title' => 'child lv 3',
+                    'desc' => 'Test insert Permissions',
+                    'parent_id' =>'dasdadadas'
+                ),
+                'expected' => false
             )
         );
     }
@@ -199,7 +215,7 @@ class ModelRbacPermTest extends PHPUnit_Framework_TestCase {
         return array(
             '0'=> array(
                 'input' =>'-1',
-                'expected' => false
+                'expected' => -1
             )
         );
     }
