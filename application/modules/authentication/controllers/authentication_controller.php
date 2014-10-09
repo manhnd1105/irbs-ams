@@ -22,6 +22,7 @@ class Authentication_controller extends Frontend_Controller
         parent::__construct();
         $this->account_factory = \super_classes\InkiuAccountFactory::get_instance();
         $this->load->module('template/template_controller');
+        $this->no_cache();
     }
 
     /**
@@ -119,5 +120,12 @@ class Authentication_controller extends Frontend_Controller
     {
         $this->session->sess_destroy();
         redirect('authentication/authentication_controller/view_login');
+    }
+
+    private function no_cache(){
+        $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
+        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $this->output->set_header('Pragma: no-cache');
+        $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
     }
 } 

@@ -31,7 +31,8 @@ class MY_Controller extends MX_Controller
         $this->restrict_factory = \super_classes\RbacRestrictAccessFactory::get_instance();
         $this->CI = &get_instance();
         $this->restrict_access();
-        $this->login_access();
+       //$this->login_access();
+
     }
 
     private function restrict_access()
@@ -80,6 +81,8 @@ class MY_Controller extends MX_Controller
         if ($acc_name == false && $url !== $redirect_url)
         {
             redirect($redirect_url);
+        }else{
+            redirect('home/home_controller/index');
         }
     }
 

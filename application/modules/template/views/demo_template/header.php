@@ -1,5 +1,3 @@
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 <link rel="stylesheet" href="<?php echo base_url() . "assets/css/bootstrap.css"; ?>">
@@ -51,7 +49,7 @@
                     <a href="#">
                         <div>
                             <i class="fa fa-users fa-fw"></i> 3 new notifications
-<span class="pull-right text-muted small">2 days ago</span>
+                            <span class="pull-right text-muted small">2 days ago</span>
                         </div>
                     </a>
                 </li>
@@ -63,21 +61,21 @@
         <!-- /.dropdown -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <?php
             $acc_name = $this->session->userdata('acc_name');
 
             echo '<ul class="dropdown-menu dropdown-user">';
-                echo '<li>';
+            echo '<li>';
             echo '<a href="#">Hello, ' . $acc_name . '</a>';
             echo '</li>';
-               echo  '<li><a href="#"><i class="fa fa-gear fa-fw"></i>Profile</a>';
-                echo '</li>';
-                echo '<li>';
-                echo anchor('authentication/authentication_controller/logout', 'Log out');
-                echo '</li>';
-                echo '<li class="divider"></li>';
+            echo '<li><a href="#"><i class="fa fa-gear fa-fw"></i>Profile</a>';
+            echo '</li>';
+            echo '<li>';
+            echo anchor('authentication/authentication_controller/logout', 'Log out');
+            echo '</li>';
+            echo '<li class="divider"></li>';
             echo '</ul>';
             ?>
         </li>
@@ -88,8 +86,8 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <?php $this->load->view('side_menu'); ?>
-</ul>
-</div>
-</div>
-<!-- End side-menu -->
+            </ul>
+        </div>
+    </div>
+    <!-- End side-menu -->
 </nav>

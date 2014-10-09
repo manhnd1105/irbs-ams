@@ -20,6 +20,8 @@ class Account_controller extends Frontend_Controller
 
     private $rbac_assigning_factory;
 
+    var $CI;
+
     /**
      * Construct function
      */
@@ -30,7 +32,10 @@ class Account_controller extends Frontend_Controller
         $this->rbac_role_factory = \super_classes\RbacRoleFactory::get_instance();
         $this->rbac_assigning_factory = \super_classes\RbacAssigningFactory::get_instance();
         $this->load->module('template/template_controller');
+        $this->no_cache();
+
     }
+
 
     /**
      * Create an account
@@ -125,7 +130,7 @@ class Account_controller extends Frontend_Controller
     {
 //        //Get all accounts information from database
         $data['acc_tree'] = $this->account_factory->load_accounts_info_html();
-         $this->render('account', '/index', $data);
+        $this->render('account', '/index', $data);
     }
 
     /**
@@ -206,6 +211,14 @@ class Account_controller extends Frontend_Controller
     function test()
     {
         $this->account_factory->test();
+    }
+
+    private function no_cache()
+    {
+        $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
+        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $this->output->set_header('Pragma: no-cache');
+        $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
     }
 }
 
