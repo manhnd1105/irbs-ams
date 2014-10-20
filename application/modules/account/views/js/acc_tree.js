@@ -229,6 +229,8 @@ list_view.prototype.list_assigned = function () {
             that.display_error(data);
         }
     });
+
+
     //var dialog = new BootstrapDialog(
     //    {
     //        title: 'confirm',
@@ -269,6 +271,7 @@ list_view.prototype.list_assigned = function () {
     //);
     //dialog.open();
 }
+
 list_view.prototype.display_success = function (html_form) {
     $('#event_result').html('success: ' + html_form);
     self.location = base_url + 'index.php/account/account_controller/';
@@ -305,4 +308,115 @@ $(function () {
     new list_view({
         'backbone': backbone
     });
+
+    $('#create').click(function(event){
+        event.preventDefault();
+        var dialog = new BootstrapDialog(
+            {
+                title: 'Create Account',
+                message: function (var_dialog) {
+                    var result = $('<div></div>');
+                    var pageToLoad = var_dialog.getData('page_to_load');
+                    result.load(pageToLoad);
+
+                    return result;
+                },
+                data: {
+                    'page_to_load': base_url + 'application/modules/account/views/create_form.php'
+                },
+                type: BootstrapDialog.TYPE_INFO,
+                closable: true,
+                buttons: [{
+                    label: 'Cancel',
+                    action: function(dialog) {
+                        typeof dialog.getData('callback') === 'function' && dialog.getData('callback')(false);
+                        dialog.close();
+                    }
+                }, {
+                    label: 'Submit',
+                    cssClass: 'btn-primary',
+                    action: function(dialog) {
+                        typeof dialog.getData('callback') === 'function' && dialog.getData('callback')(true);
+                        var info=$('#form2').serialize();
+                        alert(info);
+
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "home_controller.php",
+                        //    data: info,
+                        //    success: function(data){
+                        //        alert(data);
+                        //    }
+                        //});
+                        dialog.close();
+                    }
+                }]
+            },
+            function(result){
+                if(result) {
+                    alert('Yup.');
+                } else {
+                    alert('Nope.');
+                }
+            }
+        );
+        dialog.open();
+    });
+
+    //set event for update button
+
+    $('#update').click(function(event){
+        event.preventDefault();
+        var dialog = new BootstrapDialog(
+            {
+                title: 'Update Account',
+                message: function (var_dialog) {
+                    var result = $('<div></div>');
+                    var pageToLoad = var_dialog.getData('page_to_load');
+                    result.load(pageToLoad);
+
+                    return result;
+                },
+                data: {
+                    'page_to_load': base_url + 'application/modules/account/views/create_form.php'
+                },
+                type: BootstrapDialog.TYPE_INFO,
+                closable: true,
+                buttons: [{
+                    label: 'Cancel',
+                    action: function(dialog) {
+                        typeof dialog.getData('callback') === 'function' && dialog.getData('callback')(false);
+                        dialog.close();
+                    }
+                }, {
+                    label: 'Submit',
+                    cssClass: 'btn-primary',
+                    action: function(dialog) {
+                        typeof dialog.getData('callback') === 'function' && dialog.getData('callback')(true);
+                        var info=$('#form2').serialize();
+                        alert(info);
+
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "home_controller.php",
+                        //    data: info,
+                        //    success: function(data){
+                        //        alert(data);
+                        //    }
+                        //});
+                        dialog.close();
+                    }
+                }]
+            },
+            function(result){
+                if(result) {
+                    alert('Yup.');
+                } else {
+                    alert('Nope.');
+                }
+            }
+        );
+        dialog.open();
+    });
 });
+

@@ -17,6 +17,8 @@ echo "<script src='" . base_url() . "assets/js/jquery.js'></script>";
 echo "<script src='" . base_url() . "assets/third_party/jstree/jstree.min.js'></script>";
 echo "<script src='" . base_url() . "application/modules/account/views/js/acc_tree.js'></script>";
 
+
+
 echo '<div>&nbsp;</div>';
 echo '<div>&nbsp;</div>';
 echo '<div>&nbsp;</div>';
@@ -30,3 +32,5 @@ echo form_button('btn_update', 'Update account', "id='btn_update', class='btn bt
 echo form_button('btn_delete', 'Delete account', "id='btn_delete', class='btn btn-success'");
 echo form_button('btn_list_roles', 'List assigned roles', "id='btn_list_roles', class='btn btn-success'");
 echo form_button('btn_assign_roles', 'Assign roles', "id='btn_assign_roles', class='btn btn-success'");
+echo form_button('btn_create', 'Create account', "id='create', class='btn btn-success'");
+echo form_button('btn_create', 'Update account', "id='update', class='btn btn-success'");

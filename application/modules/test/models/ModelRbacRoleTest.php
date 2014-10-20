@@ -16,14 +16,15 @@ class ModelRbacRoleTest extends PHPUnit_Framework_TestCase
      * @param $expected
      * @dataProvider  providerTestGet
      */
-    public function testGet($input, $expected){
+    public function testGet($input, $expected)
+    {
         //Create an instance of model
-         $model=new Model_rbac_role();
+        $model = new Model_rbac_role();
         // Ask model to perform method that needed to test
-        $actual=$model->get($input);
+        $actual = $model->get($input);
 
         //Assert equals
-        $this->assertEquals($expected,$actual);
+        $this->assertEquals($expected, $actual);
 
     }
 
@@ -32,31 +33,53 @@ class ModelRbacRoleTest extends PHPUnit_Framework_TestCase
      * @return array
      *
      */
-    function providerTestGet(){
+    function providerTestGet()
+    {
         return array(
-            ''=>array(
-                'id'=>1,
-                'expected'=>array(
-                    'id'=> 1,
-                    'title'=>'root',
-                    'desc'=>'root',
-                    'path'=>'/asasasas/asasasas',
-                    'parent_id'=>2
+            '0' => array(
+                'id' => 1,
+                'expected' => array(
+                    'id' => 1,
+                    'title' => 'root',
+                    'desc' => 'root',
+                    'path' => '/asasasas/asasasas',
+                    'parent_id' => '2'
+                )
+            ),
+            '1' => array(
+                'id' => 1,
+                'expected' => array(
+                    'id' => 1,
+                    'title' => 'root',
+                    'desc' => 'root',
+                    'path' => '/asasasas/asasasas',
+                    'parent_id' => '-1'
+                ),
+                '2' => array(
+                    'id' => 1,
+                    'expected' => array(
+                        'id' => 1,
+                        'title' => 'root',
+                        'desc' => 'root',
+                        'path' => '/asasasas/asasasas',
+                        'parent_id' => 'almn'
+                    )
                 )
             )
         );
     }
 
 
-    public function testGets(){
+    public function testGets()
+    {
         //Create an instance of model
-        $model=new Model_rbac_role();
+        $model = new Model_rbac_role();
 
         //Ask model to perform method that needed to test
-        $actual =$model->gets();
+        $actual = $model->gets();
 
         //Assert result
-        $this->assertTrue(sizeof($actual)>0);
+        $this->assertTrue(sizeof($actual) > 0);
     }
 
     /**
@@ -64,25 +87,43 @@ class ModelRbacRoleTest extends PHPUnit_Framework_TestCase
      * @param $expected
      * @dataProvider providerTestInsertRole
      */
-    public  function testInsertRole($input, $expected){
+    public function testInsertRole($input, $expected)
+    {
         //Create an instance of model
-        $model=new Model_rbac_role();
+        $model = new Model_rbac_role();
         //Ask model to perform method that needed to test
-        $actual =$model->insert($input);
+        $actual = $model->insert($input);
         //Assert result
-        $this->assertEquals($expected,$actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
      * Data provider for testInsertRole
      */
-    function providerTestInsertRole(){
+    function providerTestInsertRole()
+    {
         return array(
-            '0'=> array(
+            '0' => array(
                 'input' => array(
                     'title' => 'asasasas',
                     'desc' => 'dfjkdlfd',
-                    'parent_id' =>'3'
+                    'parent_id' => '3'
+                ),
+                'expected' => true
+            ),
+            '0' => array(
+                'input' => array(
+                    'title' => 'asasasas',
+                    'desc' => 'dfjkdlfd',
+                    'parent_id' => '-1'
+                ),
+                'expected' => true
+            ),
+            '0' => array(
+                'input' => array(
+                    'title' => 'asasasas',
+                    'desc' => 'dfjkdlfd',
+                    'parent_id' => 'fFFVf'
                 ),
                 'expected' => true
             )
@@ -94,7 +135,8 @@ class ModelRbacRoleTest extends PHPUnit_Framework_TestCase
      * @param $expected
      * @dataProvider providerTestInsertByPath
      */
-    public function testInsertByPath($input, $expected){
+    public function testInsertByPath($input, $expected)
+    {
         //Create an instance of model
         $model = new Model_rbac_role();
 
@@ -102,19 +144,20 @@ class ModelRbacRoleTest extends PHPUnit_Framework_TestCase
         $actual = $model->insert_by_path($input);
 
         //Assert result
-        $this->assertEquals($expected,$actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
      * Data provider for testInsertByPath
      */
-    function providerTestInsertByPath(){
+    function providerTestInsertByPath()
+    {
         return array(
-            '0'=> array(
+            '0' => array(
                 'input' => array(
                     'path' => 'dfdfsdf',
                     'title' => 'ddsfds',
-                    'desc' =>'dsgsgsdgsd'
+                    'desc' => 'dsgsgsdgsd'
                 ),
                 'expected' => false
             )
@@ -126,14 +169,15 @@ class ModelRbacRoleTest extends PHPUnit_Framework_TestCase
      * @param $expected
      * @dataProvider providerTestModify
      */
-    public function testModify($input,$expected){
+    public function testModify($input, $expected)
+    {
         //Create an instance of model
-        $model=new Model_rbac_role();
+        $model = new Model_rbac_role();
         //Ask model to perform method that needed to test
-        $actual=$model->modify($input);
+        $actual = $model->modify($input);
 
         //Assert result
-        $this->assertEquals($expected,$actual);
+        $this->assertEquals($expected, $actual);
 
     }
 
@@ -141,13 +185,14 @@ class ModelRbacRoleTest extends PHPUnit_Framework_TestCase
      * dataProvider for testModify
      * @return array
      */
-    function providerTestModify(){
+    function providerTestModify()
+    {
         return array(
-            '0'=> array(
+            '0' => array(
                 'input' => array(
                     'id' => '51',
                     'title' => 'Test edit title',
-                    'desc' =>'adadsa'
+                    'desc' => 'adadsa'
                 ),
                 'expected' => true
             )
@@ -159,23 +204,25 @@ class ModelRbacRoleTest extends PHPUnit_Framework_TestCase
      * @param $expected
      * @dataProvider providerTestRemove
      */
-    public function testRemove($input, $expected){
+    public function testRemove($input, $expected)
+    {
         //Create an instance of model
-        $model=new Model_rbac_role();
+        $model = new Model_rbac_role();
         //Ask model to perform method that needed to test
-        $actual=$model->remove($input);
+        $actual = $model->remove($input);
 
         //Assert result
-        $this->assertEquals($expected,$actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
      * Data provider for testRemove
      */
-    function providerTestRemove(){
+    function providerTestRemove()
+    {
         return array(
-            '0'=> array(
-                'input' =>'-1',
+            '0' => array(
+                'input' => '-1',
                 'expected' => true
             )
         );
