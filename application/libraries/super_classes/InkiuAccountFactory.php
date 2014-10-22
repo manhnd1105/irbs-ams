@@ -459,5 +459,10 @@ class InkiuAccountFactory implements ISingleton
 //        $r = $this->model_account->getDescendants('33');
 //        var_dump($r);
     }
+
+    public function get_children($id)
+    {
+        return $this->model_account->get_children($id);
+    }
 }
 

@@ -359,6 +359,38 @@ class Model_account
     }
 
     /**
+     * Get all children (level 1) of a node
+     * @param $id
+     * @return mixed
+     */
+    public function get_children($id)
+    {
+//        $sql = "
+//            SELECT node.*, (COUNT(parent.id)-1 - (sub_tree.depth )) AS Depth
+//            FROM inkiu_account AS node,
+//            	inkiu_account AS parent,
+//            	inkiu_account AS sub_parent,
+//           	(
+//            		SELECT node.id, (COUNT(parent.id) - 1) AS depth
+//            		FROM inkiu_account AS node,
+//            		inkiu_account AS parent
+//            		WHERE node.lft BETWEEN parent.lft AND parent.rgt
+//            		AND node.id = {$id}
+//            		GROUP BY node.id
+//            		ORDER BY node.lft
+//            ) AS sub_tree
+//            WHERE node.lft BETWEEN parent.lft AND parent.rgt
+//            	AND node.lft BETWEEN sub_parent.lft AND sub_parent.rgt
+//            	AND sub_parent.id = sub_tree.id
+//            GROUP BY node.id
+//            HAVING Depth = 1
+//            ORDER BY node.lft;
+//        ";
+        $sql = "SELECT * FROM inkiu_account WHERE parent_id={$id}";
+        return $this->db->query($sql)->result_array();
+    }
+
+    /**
      * Delete a node and all of its descendants
      * @param $id
      */

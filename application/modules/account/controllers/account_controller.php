@@ -210,7 +210,7 @@ class Account_controller extends Frontend_Controller
 
     function test()
     {
-        $this->account_factory->test();
+        var_dump($this->account_factory->get_children('8'));
     }
 
     private function no_cache()

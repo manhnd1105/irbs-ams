@@ -20,7 +20,7 @@ class Client_controller extends CI_Controller
                         //'ssl_verify_peer' => TRUE,
                         //'ssl_cainfo'      => '/certs/cert.pem'
                 ); */
-        $config = array('server' => 'http://localhost/irbs/index.php/api/api_controller/',
+        $config = array('server' => 'http://localhost/irbs-ams/index.php/api/api_controller/',
 
         );
         // Run some setup
@@ -35,10 +35,9 @@ class Client_controller extends CI_Controller
 //            'address' => 'abc123'
 //        );
         $method = 'get';
-        $uri = 'check_permission';
+        $uri = 'children';
         $params = array(
-            'acc_id' => '8',
-            'perm_path' => '/irbs/account/account_controller/'
+            'id' => '8'
         );
         //$method is putted in {} to vary method name instead of calling a fixed name function
         $request = $this->rest->{$method}($uri, $params);

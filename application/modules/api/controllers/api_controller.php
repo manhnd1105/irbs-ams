@@ -613,4 +613,26 @@ class Api_controller extends REST_Controller
             $this->response($message, 404);
         }
     }
+
+    function children_get()
+    {
+        //Get information from GET method of Restful standard
+        $id = $this->get('id');
+
+        //Ask factory to perform retrieving children nodes of a node
+        $result = $this->account_factory->get_children($id);
+
+        //Send response to client
+//        $this->response($result, 200);
+        if ($result)
+        {
+            $this->response($result, 200);
+        } else
+        {
+            $message = array(
+                'status' => 'error'
+            );
+            $this->response($message, 404);
+        }
+    }
 }
