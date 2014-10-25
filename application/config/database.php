@@ -1,4 +1,6 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -44,46 +46,61 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
-if (! defined('PHPUNIT_TEST')){
-    $active_group = 'remote';
-    $active_record = TRUE;
+if (!defined('PHPUNIT_TEST')) {
+    $active_group = 'vps';
+    $active_record = true;
 
-    $db['remote']['hostname'] = 'mysql:host=123.30.238.216:3306';
-    $db['remote']['username'] = 'irbs';
-    $db['remote']['password'] = '123456';
-    $db['remote']['database'] = 'irbs';
-    $db['remote']['dbdriver'] = 'pdo';
-    $db['remote']['dbprefix'] = '';
-    $db['remote']['pconnect'] = TRUE;
-    $db['remote']['db_debug'] = TRUE;
-    $db['remote']['cache_on'] = FALSE;
-    $db['remote']['cachedir'] = '';
-    $db['remote']['char_set'] = 'utf8';
-    $db['remote']['dbcollat'] = 'utf8_general_ci';
-    $db['remote']['swap_pre'] = '';
-    $db['remote']['autoinit'] = TRUE;
-    $db['remote']['stricton'] = FALSE;
+    $db['vps']['hostname'] = 'mysql:host=123.30.238.216';
+    $db['vps']['username'] = 'irbs';
+    $db['vps']['password'] = '123456';
+    $db['vps']['database'] = 'irbs';
+    $db['vps']['dbdriver'] = 'pdo';
+    $db['vps']['dbprefix'] = '';
+    $db['vps']['pconnect'] = true;
+    $db['vps']['db_debug'] = true;
+    $db['vps']['cache_on'] = false;
+    $db['vps']['cachedir'] = '';
+    $db['vps']['char_set'] = 'utf8';
+    $db['vps']['dbcollat'] = 'utf8_general_ci';
+    $db['vps']['swap_pre'] = '';
+    $db['vps']['autoinit'] = true;
+    $db['vps']['stricton'] = false;
 
-    $db['default']['hostname'] = 'mysql:host=127.0.0.1';
-    $db['default']['username'] = 'root';
-    $db['default']['password'] = '';
+    $db['default']['hostname'] = 'mysql:host=localhost';
+    $db['default']['username'] = 'irbs';
+    $db['default']['password'] = '123456';
     $db['default']['database'] = 'irbs';
     $db['default']['dbdriver'] = 'pdo';
     $db['default']['dbprefix'] = '';
-    $db['default']['pconnect'] = TRUE;
-    $db['default']['db_debug'] = TRUE;
-    $db['default']['cache_on'] = FALSE;
+    $db['default']['pconnect'] = true;
+    $db['default']['db_debug'] = true;
+    $db['default']['cache_on'] = false;
     $db['default']['cachedir'] = '';
     $db['default']['char_set'] = 'utf8';
     $db['default']['dbcollat'] = 'utf8_general_ci';
     $db['default']['swap_pre'] = '';
-    $db['default']['autoinit'] = TRUE;
-    $db['default']['stricton'] = FALSE;
+    $db['default']['autoinit'] = true;
+    $db['default']['stricton'] = false;
 
-}
-else{
+    $db['vm']['hostname'] = 'mysql:host=192.168.56.101';
+    $db['vm']['username'] = 'irbs';
+    $db['vm']['password'] = '123456';
+    $db['vm']['database'] = 'irbs';
+    $db['vm']['dbdriver'] = 'pdo';
+    $db['vm']['dbprefix'] = '';
+    $db['vm']['pconnect'] = true;
+    $db['vm']['db_debug'] = true;
+    $db['vm']['cache_on'] = false;
+    $db['vm']['cachedir'] = '';
+    $db['vm']['char_set'] = 'utf8';
+    $db['vm']['dbcollat'] = 'utf8_general_ci';
+    $db['vm']['swap_pre'] = '';
+    $db['vm']['autoinit'] = true;
+    $db['vm']['stricton'] = false;
+
+} else {
     $active_group = 'test';
-    $active_record = TRUE;
+    $active_record = true;
 
     $db['test']['hostname'] = '127.0.0.1';
     $db['test']['username'] = 'root';
@@ -91,15 +108,15 @@ else{
     $db['test']['database'] = 'irbs_testing';
     $db['test']['dbdriver'] = 'mysql';
     $db['test']['dbprefix'] = '';
-    $db['test']['pconnect'] = TRUE;
-    $db['test']['db_debug'] = TRUE;
-    $db['test']['cache_on'] = FALSE;
+    $db['test']['pconnect'] = true;
+    $db['test']['db_debug'] = true;
+    $db['test']['cache_on'] = false;
     $db['test']['cachedir'] = '';
     $db['test']['char_set'] = 'utf8';
     $db['test']['dbcollat'] = 'utf8_general_ci';
     $db['test']['swap_pre'] = '';
-    $db['test']['autoinit'] = TRUE;
-    $db['test']['stricton'] = FALSE;
+    $db['test']['autoinit'] = true;
+    $db['test']['stricton'] = false;
 }
 
 
