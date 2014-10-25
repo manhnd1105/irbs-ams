@@ -45,7 +45,7 @@
 | the active record class
 */
 if (! defined('PHPUNIT_TEST')){
-    $active_group = 'default';
+    $active_group = 'remote';
     $active_record = TRUE;
 
     $db['remote']['hostname'] = 'mysql:host=123.30.238.216:3306';
