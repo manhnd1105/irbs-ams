@@ -18,9 +18,10 @@ class Account_controller extends Frontend_Controller
      */
     private $rbac_role_factory;
 
+    /**
+     * @var \super_classes\RbacAssigningFactory
+     */
     private $rbac_assigning_factory;
-
-    var $CI;
 
     /**
      * Construct function
@@ -112,6 +113,9 @@ class Account_controller extends Frontend_Controller
         $this->render('account', '/account_create', $data);
     }
 
+    /**
+     *
+     */
     public function view_create_ajax()
     {
         //Get information from POST
@@ -208,11 +212,17 @@ class Account_controller extends Frontend_Controller
         $this->template_controller->demo_template('rbac', '/role_assigned', $data);
     }
 
+    /**
+     *
+     */
     function test()
     {
-        $this->account_factory->test();
+        var_dump($this->account_factory->get_children_reviewers('8'));
     }
 
+    /**
+     *
+     */
     private function no_cache()
     {
         $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');

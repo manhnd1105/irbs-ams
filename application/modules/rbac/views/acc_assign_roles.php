@@ -19,13 +19,14 @@ echo "<script src='" . base_url() . "assets/third_party/jstree/jstree.min.js'></
 echo "<script src='" . base_url() . "application/modules/rbac/views/js/assign_acc_role.js'></script>";
 
 echo 'Accounts:';
-echo '<div id="acc_list">';
-foreach ($acc_list as $row)
-{
-    echo '<p>' . $row . '</p>';
-}
-echo '</div>';
-echo form_hidden('selected_acc', '1');
+//echo '<div id="acc_list">';
+//foreach ($acc_list as $row)
+//{
+//    echo '<p>' . $row . '</p>';
+//}
+//echo '</div>';
+//echo form_hidden('selected_acc', '1');
+echo form_hidden('selected_acc', $acc_id);
 
 echo 'Roles:';
 echo '<div id="role_tree">';

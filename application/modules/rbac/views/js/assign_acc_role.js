@@ -71,14 +71,14 @@ assign_view.prototype.display_error = function (html_form) {
 }
 
 //--------------
-var link_clicked_view = function (options) {
-    this.backbone = options.backbone;
-    $('.acc_list').click(function () {
-        var id = $(this).attr('id');
-        $('#event_result').html('clicked id: ' + id);
-        $("input[name='selected_acc']").val(id);
-    });
-}
+//var link_clicked_view = function (options) {
+//    this.backbone = options.backbone;
+//    $('.acc_list').click(function () {
+//        var id = $(this).attr('id');
+//        $('#event_result').html('clicked id: ' + id);
+//        $("input[name='selected_acc']").val(id);
+//    });
+//}
 
 //--------------
 var unassign_view = function (options) {
@@ -126,7 +126,7 @@ $(function () {
     new unassign_view({
         'backbone': backbone
     });
-    new link_clicked_view({
-        'backbone': backbone
-    });
+    //new link_clicked_view({
+    //    'backbone': backbone
+    //});
 });

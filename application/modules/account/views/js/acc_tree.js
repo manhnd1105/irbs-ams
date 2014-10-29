@@ -80,7 +80,7 @@ backbone_class.prototype.assign = function (options) {
         'url': options.url,
         'type': 'POST',
         'data': {
-            'entity_id': entity_id
+            'acc_id': entity_id
         },
         'success': options.success,
         'error': options.error
