@@ -613,4 +613,19 @@ class Api_controller extends REST_Controller
             $this->response($message, 404);
         }
     }
+
+    /**
+     * Get all reviewers which are children of a reviewer
+     */
+    function children_reviewer_get()
+    {
+        //Get information from GET method of Restful standard
+        $acc_id = $this->get('acc_id');
+
+        //Ask factory to perform operation
+        $result = $this->account_factory->get_children_reviewers($acc_id);
+
+        //Send response to client
+        $this->response($result);
+    }
 }

@@ -97,7 +97,7 @@ backbone_class.prototype.list_assigned = function (options) {
         'url': options.url,
         'type': 'POST',
         'data': {
-            'entity_id': entity_id
+            'acc_id': entity_id
         },
         'success': options.success,
         'error': options.error
@@ -222,6 +222,8 @@ list_view.prototype.list_assigned = function () {
     this.backbone.list_assigned({
         'tree': $('#jstree').jstree(true),
         'url': base_url + 'index.php/account/account_controller/list_roles',
+        //'url': base_url + 'index.php/rbac/rbac_controller/view_assign_acc_role',
+
         'success': function (data) {
             that.display_success(data);
         },
@@ -274,7 +276,7 @@ list_view.prototype.list_assigned = function () {
 
 list_view.prototype.display_success = function (html_form) {
     $('#event_result').html('success: ' + html_form);
-    self.location = base_url + 'index.php/account/account_controller/';
+    //self.location = base_url + 'index.php/account/account_controller/';
 }
 list_view.prototype.display_error = function (html_form) {
     $('#event_result').html('error: ' + html_form);

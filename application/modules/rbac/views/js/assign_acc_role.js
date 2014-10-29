@@ -115,8 +115,11 @@ $(function () {
             "animation" : 0,
             "check_callback" : true
         },
+        "checkbox" : {
+            "keep_selected_style" : true
+        },
         "plugins" : [
-            "types", "wholerow"
+            "types", "wholerow", "checkbox"
         ]
     });
     var backbone = new backbone_class();
@@ -126,7 +129,16 @@ $(function () {
     new unassign_view({
         'backbone': backbone
     });
-    //new link_clicked_view({
-    //    'backbone': backbone
-    //});
+    var load_assigned_roles = function () {
+        $("#role_tree li").each(function () {
+            var that = this;
+            var link = this.get_children_dom()[2];
+            $("input[name='assigned_roles']").each( function () {
+                if (link.a_attr.entity_id == this.val()) {
+                    that.click();
+                }
+            });
+        });
+    };
+    load_assigned_roles();
 });

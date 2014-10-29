@@ -204,12 +204,13 @@ class Account_controller extends Frontend_Controller
         //Get input from POST
         $post = $this->input->post();
 
-        $roles = $this->rbac_assigning_factory->get_acc_assigned_roles_html($post['entity_id']);
+        $roles = $this->rbac_assigning_factory->get_acc_assigned_roles_html($post['acc_id']);
 
-        $data['role_list'] = $roles;
-        $data['back_to_main'] = 'account/account_controller';
+//        $data['role_list'] = $roles;
+//        $data['back_to_main'] = 'account/account_controller';
 //        $this->render('rbac', '/role_assigned', $data);
-        $this->template_controller->demo_template('rbac', '/role_assigned', $data);
+//        $this->template_controller->demo_template('rbac', '/role_assigned', $data);
+        print($roles);
     }
 
     /**

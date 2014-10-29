@@ -12,13 +12,13 @@
 /**
  * @var string $role_tree html format of hierarchical role nodes
  * @var array $acc_list array of information of accounts
+ * @var array $assigned_roles
  */
 echo "<link rel='stylesheet' href='" . base_url() . "assets/third_party/jstree/themes/default/style.min.css'/>";
 echo "<script src='" . base_url() . "assets/js/jquery.js'></script>";
 echo "<script src='" . base_url() . "assets/third_party/jstree/jstree.min.js'></script>";
 echo "<script src='" . base_url() . "application/modules/rbac/views/js/assign_acc_role.js'></script>";
 
-echo 'Accounts:';
 //echo '<div id="acc_list">';
 //foreach ($acc_list as $row)
 //{
@@ -27,7 +27,11 @@ echo 'Accounts:';
 //echo '</div>';
 //echo form_hidden('selected_acc', '1');
 echo form_hidden('selected_acc', $acc_id);
-
+if (isset($assigned_roles)){
+    foreach ($assigned_roles as $row) {
+        echo form_hidden('assigned_roles', $row);
+    }
+}
 echo 'Roles:';
 echo '<div id="role_tree">';
 print $role_tree;
