@@ -71,14 +71,14 @@ assign_view.prototype.display_error = function (html_form) {
 }
 
 //--------------
-var link_clicked_view = function (options) {
-    this.backbone = options.backbone;
-    $('.acc_list').click(function () {
-        var id = $(this).attr('id');
-        $('#event_result').html('clicked id: ' + id);
-        $("input[name='selected_acc']").val(id);
-    });
-}
+//var link_clicked_view = function (options) {
+//    this.backbone = options.backbone;
+//    $('.acc_list').click(function () {
+//        var id = $(this).attr('id');
+//        $('#event_result').html('clicked id: ' + id);
+//        $("input[name='selected_acc']").val(id);
+//    });
+//}
 
 //--------------
 var unassign_view = function (options) {
@@ -115,8 +115,11 @@ $(function () {
             "animation" : 0,
             "check_callback" : true
         },
+        "checkbox" : {
+            "keep_selected_style" : true
+        },
         "plugins" : [
-            "types", "wholerow"
+            "types", "wholerow", "checkbox"
         ]
     });
     var backbone = new backbone_class();
@@ -126,7 +129,16 @@ $(function () {
     new unassign_view({
         'backbone': backbone
     });
-    new link_clicked_view({
-        'backbone': backbone
-    });
+    var load_assigned_roles = function () {
+        $("#role_tree li").each(function () {
+            var that = this;
+            var link = this.get_children_dom()[2];
+            $("input[name='assigned_roles']").each( function () {
+                if (link.a_attr.entity_id == this.val()) {
+                    that.click();
+                }
+            });
+        });
+    };
+    load_assigned_roles();
 });

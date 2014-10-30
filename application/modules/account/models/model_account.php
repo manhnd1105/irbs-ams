@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class Model_account
  */
@@ -10,18 +11,17 @@ class Model_account
     private $db;
 
 
-
     /**
      * @var CI_Controller
      */
-    private  $CI;
+    private $CI;
 
     /**
      * Construct function
      */
     function __construct()
     {
-        $this->CI = & get_instance();
+        $this->CI = &get_instance();
         $this->db = $this->CI->db;
     }
 
@@ -29,20 +29,20 @@ class Model_account
      * Get information of accounts from a table
      *
      * @param string $table
-     * @param array $where Content of WHERE statement in query
-     *        Example: $where = array('Name' => 'manhnd')
+     * @param array  $where           Content of WHERE statement in query
+     *                                Example: $where = array('Name' => 'manhnd')
      * @param string $required_fields Table columns that you want to select in query
-     *        Example: $required_fields = 'RoleName, RoleDescription'
-     * @param string $return_type Number of rows that you want to take in query
-     *        Example: $return_type = 'one'
-     *        Values:
-     *            'all': select all rows in result
-     *            'one': select one row in result (first row)
+     *                                Example: $required_fields = 'RoleName, RoleDescription'
+     * @param string $return_type     Number of rows that you want to take in query
+     *                                Example: $return_type = 'one'
+     *                                Values:
+     *                                'all': select all rows in result
+     *                                'one': select one row in result (first row)
      * @return mixed
      */
-    public function read($table, $where = NULL, $required_fields = '*', $return_type = 'all')
+    public function read($table, $where = null, $required_fields = '*', $return_type = 'all')
     {
-        if ($where !== NULL) {
+        if ($where !== null) {
             $this->db->where($where);
         }
         $this->db->select($required_fields);
@@ -61,20 +61,20 @@ class Model_account
     /**
      * Get information of accounts from joined tables
      *
-     * @param array $where Content of WHERE statement in query
-     *        Example: $where = array('Name' => 'manhnd')
+     * @param array  $where           Content of WHERE statement in query
+     *                                Example: $where = array('Name' => 'manhnd')
      * @param string $required_fields Table columns that you want to select in query
-     *        Example: $required_fields = 'RoleName, RoleDescription'
-     * @param string $return_type Number of rows that you want to take in query
-     *        Example: $return_type = 'one'
-     *        Values:
-     *            'all': select all rows in result
-     *            'one': select one row in result (first row)
+     *                                Example: $required_fields = 'RoleName, RoleDescription'
+     * @param string $return_type     Number of rows that you want to take in query
+     *                                Example: $return_type = 'one'
+     *                                Values:
+     *                                'all': select all rows in result
+     *                                'one': select one row in result (first row)
      * @return mixed
      */
-    public function read_tables($where = NULL, $required_fields = '*', $return_type = 'all')
+    public function read_tables($where = null, $required_fields = '*', $return_type = 'all')
     {
-        if ($where !== NULL) {
+        if ($where !== null) {
             $this->db->where($where);
         }
         $this->db->select($required_fields);
@@ -91,6 +91,54 @@ class Model_account
         return $result;
     }
 
+    /**
+     * Get information of accounts from multi joined tables
+     *
+     * @param array  $where           Content of WHERE statement in query
+     *                                Example: $where = array('Name' => 'manhnd')
+     * @param string $required_fields Table columns that you want to select in query
+     *                                Example: $required_fields = 'RoleName, RoleDescription'
+     * @param string $return_type     Number of rows that you want to take in query
+     *                                Example: $return_type = 'one'
+     *                                Values:
+     *                                'all': select all rows in result
+     *                                'one': select one row in result (first row)
+     * @param string $tables          The tables' names in FROM statement
+     *                                Example: $tables = 'account, inkiu_account, userroles'
+     * @return array
+     */
+    public function read_multi_tables(
+        $where = null,
+        $required_fields = '*',
+        $return_type = 'all',
+        $tables
+    ) {
+        if ($where !== null) {
+            foreach ($where as $row) {
+                $this->db->where($row);
+            }
+        }
+        $this->db->select($required_fields);
+        $this->db->from($tables);
+        $result = array();
+        switch ($return_type) {
+            case 'all':
+                $result = $this->db->get()->result_array();
+                break;
+            case 'one':
+                $result = $this->db->get()->row_array();
+        }
+        return $result;
+    }
+
+    /**
+     * Perform complex sql queries
+     * @param $sql
+     * @return mixed
+     */
+    public function query($sql) {
+        return $this->db->query($sql);
+    }
 //    /**
 //     * Insert information of new account
 //     * @param array $info
@@ -122,16 +170,14 @@ class Model_account
      */
     public function update($info)
     {
-        try
-        {
+        try {
             $account_info = new Account_table($info);
             $inkiu_account_info = new Inkiu_account_table($info);
             $account_id = $info['id'];
 
             $this->db->update('account', $account_info, array('id' => $account_id));
             $this->db->update('inkiu_account', $inkiu_account_info, array('id' => $account_id));
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             \super_classes\IrbsException::write_log('error', $e);
             return false;
         }
@@ -196,53 +242,47 @@ class Model_account
         return $this->db->get()->row_array()['id'];
     }
 
-
     /**
-     * Get path of a node as string path
-     * @param $id
-     * @return string
+     * Insert information of new account
+     * @param array $info
+     * @return mixed
      */
-    public function get_path($id)
+    public function insert($info)
     {
-        $path_nodes = $this->get_path_nodes($id);
-        $path = '';
-        foreach ($path_nodes as $row)
-        {
-            $this->db->where(array('id' => $row->id));
-            $this->db->select('account_name');
-            $this->db->from('account');
 
-            $path .= $this->db->get()->row_array()['account_name'] . '/';
-        }
-        return $path;
-    }
+        $this->db->trans_start();
+        //Insert into account table
+        $acc_info = new Account_table($info);
+        $this->db->insert('account', $acc_info);
 
-    /**
-     * Get path of a node as array of nodes
-     * @param $id
-     */
-    private function get_path_nodes($id)
-    {
-        $path_sql =
-            "SELECT parent.*
-            FROM inkiu_account AS node, inkiu_account AS parent
-            WHERE node.lft BETWEEN parent.lft AND parent.rgt
-            AND node.id = " . $id .  "
-            ORDER BY parent.lft";
-        return $this->db->query($path_sql)->result();
+        //Get inserted id and then insert into inkiu account table
+        $inserted_id = $this->db->insert_id();
+        $inkiu_acc_info = array(
+            'id'        => $inserted_id,
+            'address'   => 'dump',
+            'parent_id' => $info['parent_id'],
+            'path'      => 'dump',
+            'email'     => $info['email'],
+            'depth'     => '-1'
+        );
+        //Calculate the left, right, path, depth
+        $this->insert_child($info['parent_id'], $inkiu_acc_info);
+
+//        $this->db->insert('inkiu_account', $inkiu_acc_info);
+        $this->db->trans_complete();
+        return $inserted_id;
     }
 
     /**
      * Insert a new child as a children of a selected node
-     * @param int $id
+     * @param int   $id
      * @param array $info
      */
     private function insert_child($id, $info)
     {
         //Find the Sibling
         $Sibl = $this->get_slibings($id)[0];
-        if ($Sibl==null)
-        {
+        if ($Sibl == null) {
             $Sibl['lft'] = 0;
         }
         $lft = $Sibl['lft'];
@@ -288,34 +328,37 @@ class Model_account
     }
 
     /**
-     * Insert information of new account
-     * @param array $info
-     * @return mixed
+     * Get path of a node as string path
+     * @param $id
+     * @return string
      */
-    public function insert($info)
+    public function get_path($id)
     {
+        $path_nodes = $this->get_path_nodes($id);
+        $path = '';
+        foreach ($path_nodes as $row) {
+            $this->db->where(array('id' => $row->id));
+            $this->db->select('account_name');
+            $this->db->from('account');
 
-        $this->db->trans_start();
-        //Insert into account table
-        $acc_info = new Account_table($info);
-        $this->db->insert('account', $acc_info);
+            $path .= $this->db->get()->row_array()['account_name'] . '/';
+        }
+        return $path;
+    }
 
-        //Get inserted id and then insert into inkiu account table
-        $inserted_id = $this->db->insert_id();
-        $inkiu_acc_info = array(
-            'id' => $inserted_id,
-            'address' => 'dump',
-            'parent_id' => $info['parent_id'],
-            'path' => 'dump',
-            'email' => $info['email'],
-            'depth' => '-1'
-        );
-        //Calculate the left, right, path, depth
-        $this->insert_child($info['parent_id'], $inkiu_acc_info);
-
-//        $this->db->insert('inkiu_account', $inkiu_acc_info);
-        $this->db->trans_complete();
-        return $inserted_id;
+    /**
+     * Get path of a node as array of nodes
+     * @param $id
+     */
+    private function get_path_nodes($id)
+    {
+        $path_sql =
+            "SELECT parent.*
+            FROM inkiu_account AS node, inkiu_account AS parent
+            WHERE node.lft BETWEEN parent.lft AND parent.rgt
+            AND node.id = " . $id . "
+            ORDER BY parent.lft";
+        return $this->db->query($path_sql)->result();
     }
 
     /**
@@ -334,7 +377,7 @@ class Model_account
      */
     public function get_descendants($id)
     {
-        $DepthConcat="- (sub_tree.depth )";
+        $DepthConcat = "- (sub_tree.depth )";
         $sql = "
             SELECT node.*, (COUNT(parent.id)-1 {$DepthConcat} ) AS Depth
             FROM inkiu_account AS node,
@@ -412,6 +455,27 @@ class Model_account
     }
 
     /**
+     * Remove
+     * @param $id
+     * @return bool
+     */
+    public function remove($id)
+    {
+        try {
+            $this->db->trans_start();
+            $this->db->delete('rbac_userroles', array('UserID' => $id));
+            $this->remove_shift($id);
+            $this->db->delete('account', array('id' => $id));
+            $this->db->trans_complete();
+            return true;
+        } catch (Exception $e) {
+            print $e->getMessage();
+            return false;
+        }
+
+    }
+
+    /**
      * Delete a node and shift its descendants
      * @param $id
      */
@@ -432,27 +496,6 @@ class Model_account
 
         $sql = "UPDATE inkiu_account SET lft = lft - 2 WHERE lft > {$info['Right']}";
         $this->db->query($sql);
-    }
-
-    /**
-     * Remove
-     * @param $id
-     * @return bool
-     */
-    public function remove($id)
-    {
-        try{
-            $this->db->trans_start();
-            $this->db->delete('rbac_userroles', array('UserID' => $id));
-            $this->remove_shift($id);
-            $this->db->delete('account', array('id' => $id));
-            $this->db->trans_complete();
-            return true;
-        }catch (Exception $e){
-            print $e ->getMessage();
-            return false;
-        }
-
     }
 }
 

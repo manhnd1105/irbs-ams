@@ -114,9 +114,25 @@ class Rbac_controller extends Frontend_Controller
      */
     public function view_assign_acc_role()
     {
+        //Get account id from POST
+        $post = $this->input->post();
+        $acc_id = $post['acc_id'];
+
+        //Load assigned roles in database if existing
+        $roles = $this->rbac_assigning_factory->get_acc_assigned_roles($acc_id);
+        if ($roles !== null) {
+            $assigned_ids = array();
+            foreach ($roles as $row) {
+                $assigned_ids[] = $row['ID'];
+            }
+            $data['assigned_roles'] = $assigned_ids;
+        }
+
         //Prepare data for displaying by asking factory to collect information
         $data['role_tree'] = $this->rbac_role_factory->read_roles_html();
-        $data['acc_list'] = $this->acc_factory->load_accounts_info_links();
+        $data['acc_id'] = $acc_id;
+
+//        $data['acc_list'] = $this->acc_factory->load_accounts_info_links();
 
         //Display to view
 //        $this->render('rbac', '/acc_assign_roles', $data);

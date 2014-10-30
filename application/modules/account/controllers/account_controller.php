@@ -18,9 +18,10 @@ class Account_controller extends Frontend_Controller
      */
     private $rbac_role_factory;
 
+    /**
+     * @var \super_classes\RbacAssigningFactory
+     */
     private $rbac_assigning_factory;
-
-    var $CI;
 
     /**
      * Construct function
@@ -112,6 +113,9 @@ class Account_controller extends Frontend_Controller
         $this->render('account', '/account_create', $data);
     }
 
+    /**
+     *
+     */
     public function view_create_ajax()
     {
         //Get information from POST
@@ -200,19 +204,26 @@ class Account_controller extends Frontend_Controller
         //Get input from POST
         $post = $this->input->post();
 
-        $roles = $this->rbac_assigning_factory->get_acc_assigned_roles_html($post['entity_id']);
+        $roles = $this->rbac_assigning_factory->get_acc_assigned_roles_html($post['acc_id']);
 
-        $data['role_list'] = $roles;
-        $data['back_to_main'] = 'account/account_controller';
+//        $data['role_list'] = $roles;
+//        $data['back_to_main'] = 'account/account_controller';
 //        $this->render('rbac', '/role_assigned', $data);
-        $this->template_controller->demo_template('rbac', '/role_assigned', $data);
+//        $this->template_controller->demo_template('rbac', '/role_assigned', $data);
+        print($roles);
     }
 
+    /**
+     *
+     */
     function test()
     {
-        var_dump($this->account_factory->get_children('8'));
+        var_dump($this->account_factory->get_children_reviewers('8'));
     }
 
+    /**
+     *
+     */
     private function no_cache()
     {
         $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
