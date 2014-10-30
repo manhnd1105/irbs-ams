@@ -82,6 +82,25 @@ class Api_controller extends REST_Controller
     }
 
     /**
+     * Find id of an account by its name
+     */
+    function acc_id_get()
+    {
+        //Get information from GET method of Restful standard
+        $acc_name = $this->get('acc_name');
+
+        //Ask factory to get account information
+        $id = $this->account_factory->model_acc_get_id_by_name($acc_name);
+
+        //Send response to client
+        if ($id) {
+            $this->response($id, 400);
+        } else {
+            $this->response(array('error' => 'Account ID could not be found'), 404);
+        }
+    }
+
+    /**
      * Update information of an account and respond with status/errors
      */
     function account_post()
