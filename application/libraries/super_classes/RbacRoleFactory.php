@@ -39,6 +39,16 @@ class RbacRoleFactory implements ISingleton
     }
 
     /**
+     * Find id of a role according to its name
+     * @param $role_name
+     * @return int
+     */
+    public function find_role_id($role_name)
+    {
+        return $this->model_rbac_role->find_id($role_name);
+    }
+
+    /**
      * Private clone method to prevent cloning of the instance of the
      * *Singleton* instance.
      *

@@ -8,6 +8,12 @@ require_once __DIR__ . '/custom_entity.php';
  */
 class Model_rbac_role
 {
+
+    /**
+     * @var CI_DB_active_record
+     */
+    private $db;
+
     /**
      * @var PhpRbac\Rbac
      */
@@ -19,10 +25,11 @@ class Model_rbac_role
     {
         if (defined('PHPUNIT_TEST')) {
             $this->rbac = new \PhpRbac\Rbac('unit_test');
-        }else{
+        } else {
             $this->rbac = new \PhpRbac\Rbac();
         }
-        //$this->rbac = new \PhpRbac\Rbac();
+        $ci =& get_instance();
+        $this->db = $ci->db;
     }
 
     /**
@@ -246,6 +253,19 @@ class Model_rbac_role
             return false;
         }
         return true;
+    }
+
+    /**
+     * Find id of a role according to its name
+     * @param $role_name
+     * @return array
+     */
+    public function find_id($role_name)
+    {
+        $this->db->select('ID');
+        $this->db->from('rbac_roles');
+        $this->db->where('Title', $role_name);
+        return $this->db->get()->row_array();
     }
 }
 

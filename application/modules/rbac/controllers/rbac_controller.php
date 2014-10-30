@@ -222,4 +222,16 @@ class Rbac_controller extends Frontend_Controller
         //Display result
         echo ($status) ? 'Done' : 'Error';
     }
+
+    public function view_admin()
+    {
+        $data['actions'] = array(
+            '/rbac/perm_controller/reset' => 'Reset all permissions',
+            '/rbac/perm_controller/make_sample_perms' => 'Make sample permissions set',
+            '/rbac/role_controller/reset' => 'Reset all roles',
+            '/rbac/role_controller/make_sample_roles' => 'Make sample roles set',
+            '/rbac/rbac_controller/set_unauthorized_access' => 'Setup unauthorized permissions'
+        );
+        $this->render('rbac', 'admin', $data);
+    }
 } 

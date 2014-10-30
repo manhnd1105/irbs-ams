@@ -218,7 +218,8 @@ class Account_controller extends Frontend_Controller
      */
     function test()
     {
-        var_dump($this->account_factory->get_children_reviewers('8'));
+//        var_dump($this->account_factory->get_children_reviewers('8'));
+//        var_dump($this->rbac_role_factory->find_role_id('manager'));
     }
 
     /**
