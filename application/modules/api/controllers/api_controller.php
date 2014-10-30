@@ -247,6 +247,30 @@ class Api_controller extends REST_Controller
     }
 
     /**
+     * Get id of a role according to its name
+     */
+    function role_id_get()
+    {
+        //Get information from GET method of Restful standard
+        $role_name = $this->get('role_name');
+
+        //Ask factory to get role information
+        $info = $this->rbac_role_factory->find_role_id($role_name);
+
+        //Send response to client
+        if ($info)
+        {
+            $this->response($info, 200);
+        } else
+        {
+            $message = array(
+                'status' => 'can not find this role'
+            );
+            $this->response($message, 404);
+        }
+    }
+
+    /**
      * Get all roles information
      */
     function roles_get()
