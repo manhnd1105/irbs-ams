@@ -672,4 +672,19 @@ class Api_controller extends REST_Controller
         //Send response to client
         $this->response($result);
     }
+
+    /**
+     * Get all children of an account
+     */
+    function children_get()
+    {
+        //Get information from GET method of Restful standard
+        $acc_id = $this->get('acc_id');
+
+        //Ask factory to perform operation
+        $result = $this->account_factory->get_children($acc_id);
+
+        //Send response to client
+        $this->response($result);
+    }
 }

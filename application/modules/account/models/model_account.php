@@ -429,7 +429,7 @@ class Model_account
 //            HAVING Depth = 1
 //            ORDER BY node.lft;
 //        ";
-        $sql = "SELECT * FROM inkiu_account WHERE parent_id={$id}";
+        $sql = "SELECT * FROM inkiu_account AS t2, account AS t1 WHERE t2.parent_id={$id} AND t1.id = t2.id";
         return $this->db->query($sql)->result_array();
     }
 

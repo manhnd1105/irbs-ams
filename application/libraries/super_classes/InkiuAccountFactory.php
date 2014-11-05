@@ -471,6 +471,16 @@ class InkiuAccountFactory implements ISingleton
     }
 
     /**
+     * Get all children of an account
+     * @param $acc_id
+     * @return array
+     */
+    public function get_children($acc_id)
+    {
+        return $this->model_account->get_children($acc_id);
+    }
+
+    /**
      * Private clone method to prevent cloning of the instance of the Singleton instance
      * @return void
      */
